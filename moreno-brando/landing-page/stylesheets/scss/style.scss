@@ -1,0 +1,702 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    color: white;
+    background-color: rgb(25,25,25);
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    text-align: center;
+}
+
+
+#header {
+    height: 50px;
+    box-shadow: 0 2px 5px -2px rgba(100,100,100,0.5);
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: inherit;
+}
+
+
+#menu {
+    display: none;
+}
+
+#header-img {
+    height: 70%;
+    position: absolute;
+    align-self: center;
+    left: 0;
+    margin-left: 20px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+#nav-bar {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-link {
+    margin: 0px 30px;
+    cursor: pointer;
+}
+
+.nav-link a{
+    text-decoration: none;
+    color: inherit;
+}
+
+#nav-bar > #close-nav-bar {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    color: gray;
+    cursor: pointer;
+    display: none;
+}
+
+#close-nav-bar:hover {
+    background-color: black;
+}
+
+
+#title {
+    margin-top: 100px;
+    box-sizing: border-box;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+
+#main-content {
+    width: 100%;
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 100px;
+    position: relative;
+    overflow: hidden;
+    max-width: 1020px;
+}
+
+#video{
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+#play-video {
+    margin-bottom: 80px;
+}
+
+#play-video:hover {
+    cursor: pointer;
+    color: gold;
+}
+
+
+#getItForFree, #getItForFree2 {
+    text-decoration: underline;
+    animation: shake 1.5s linear infinite;
+}
+
+#getItForFree:hover, #getItForFree2:hover{
+    cursor: pointer;
+    color: gold;
+}
+
+#getItForFree:active, #getItForFree2:active {
+    opacity: 0.5;
+    color: orangered;
+}
+
+
+#features {
+    border-bottom: 1px solid lightgray;
+    width: 1020px;
+    max-width: 90%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
+
+#product-details {
+    width: 100%;
+    max-width: 1020px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+#subtitle {
+    width: 90%;
+    margin: auto;
+}
+
+.product-features{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+}
+
+
+
+// Flip-card start 
+
+.card-container {
+    width: 250px;
+    height: 300px;
+    margin: 10px;
+    perspective: 500px;
+    max-width: 100%;
+    box-shadow: 0 5px 10px -2px rgba(100,100,100,0.5);
+    cursor: pointer;
+}
+
+.flip-card{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+%outer-inner-shared {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.outer-card {
+    @extend %outer-inner-shared;
+}
+
+
+.outer-card::after {
+    content: 'Flip me';
+    position: absolute;
+    bottom: 10px;
+    color: lightgray;
+    background-color: rgba(25,25,25,0.025);
+    padding: 5px;
+    box-shadow: 0 0 2px rgba(150,150,150,0.9);
+    opacity: 0.7;
+    backface-visibility: hidden;
+}
+
+.inner-card {
+    @extend %outer-inner-shared;
+    // background-color: black;
+    box-sizing: border-box;
+    padding: 15px;
+    transform: rotateY(180deg);
+}
+
+
+.outer-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-container:hover .flip-card {
+    transform: rotateY(180deg);
+}
+
+// Flip-card end
+
+
+#summary-features {
+    width: 100%;
+    max-width: 1020px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 100px;
+}
+
+
+#summary-features {
+    
+    div {
+    width: 100px;
+    height: 100px;
+    margin: 30px;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 1px rgba(150,150,150,0.5);
+    }
+
+    img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 50%;
+    }
+}
+
+
+// Reviews 
+
+#reviewSection {
+    width: 100%;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+#scene{
+    perspective: 5000px;
+    width: 95%;
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 50px;     
+}
+
+#scene::after {
+    display: block;
+    content: '';
+    border-bottom: 2px solid gray;
+    width: 90%;
+    max-width: 1020px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+
+#reviews {
+    width: 250px;
+    height: 300px;
+    max-width: 80%;
+    position: relative; 
+    margin: auto;
+    animation: 30s rotating linear infinite;
+    transform-style: preserve-3d;
+    
+}
+
+@keyframes rotating {
+    0% {transform: rotateY(0deg);}
+    100% {transform: rotateY(360deg);}
+}
+
+
+.reviewCard {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+    color: black;
+    backface-visibility: hidden;
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+}
+
+
+$translate-500px: translateZ(400px);
+
+
+.card-1 {
+    transform: rotateY(360deg) $translate-500px;
+}
+
+.card-2 {
+    transform: rotateY(60deg) $translate-500px;
+}
+
+.card-3{
+    transform: rotateY(120deg) $translate-500px;
+}
+
+.card-4 {
+    transform: rotateY(180deg) $translate-500px; 
+}
+
+.card-5 {
+    transform: rotateY(240deg) $translate-500px; 
+}
+
+.card-6 {
+    transform: rotateY(300deg) $translate-500px;    
+}
+
+.reviewCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+
+// modal form start
+
+#modal-form {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 5;
+    display: none;
+}
+
+
+@import 'form-partial';
+
+#form {
+    @extend %form-shared;
+    position: relative;
+}
+
+
+
+.close {
+    float: right;
+    margin-top: -10px;
+    font-size: 2em;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.close:active {
+    opacity: 0.5;
+    color: orangered;
+}
+
+.close-text {
+    font-size: 12px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.close:hover {
+    opacity: 0.5;
+    background-color: black;
+}
+
+#form div{
+    margin-top: 30px;
+}
+
+#form h2, #form h4 {
+    color: gold;
+}
+
+
+input[type=email] {
+    width: 100%;
+    box-sizing: border-box;
+    height: 30px;
+    margin: 10px 0;
+    border-style: none;
+}
+
+input[type=email]:focus {
+    background-color: rgba(255, 215,0,0.01);
+    color: white;
+    font-weight: 600;
+    border: 1px solid gold;
+    outline: none;
+}
+
+input[type=email]:not(:focus):not(:placeholder-shown):invalid {
+    border: 1px solid red;
+    
+}
+
+input[type=email]:not(:focus):not(:placeholder-shown):valid {
+    border: 1px solid green;
+}
+
+
+input[type=submit] {
+    width: 100%;
+    height: 25px;
+    box-sizing: border-box;
+    border-style: none;
+    margin: 20px 0;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+
+input[type=submit]:active {
+    color: white;
+}
+
+
+[type=submit]:hover {
+    background-color: rgba(247,202,24,1);
+}
+
+
+[type=submit]:disabled:hover {
+    background-color: gray;
+}
+
+
+#form label {
+    font-size: 14px;
+    position: relative;
+}
+
+
+//modifying checkbox style
+#agree {
+    opacity: 0;
+}
+
+#checkboxLabel {
+    cursor: pointer;
+}
+
+.checkmark{
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    left: -20px;
+    top: 2px;
+    background-color: whitesmoke;
+}
+
+.checkmark:hover {
+    background-color: gray;
+}
+
+#agree:checked ~ label .checkmark {
+    background-color: gold;
+}
+
+.checkmark::after{
+    content: 'L';
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    top:-3px;
+    left: 2px;
+    font-weight: 600;
+    color: black;
+    transform: rotateY(180deg) rotate(-35deg);
+    display: none;
+}
+
+#agree:checked ~ label .checkmark::after{
+    display: block;
+}
+
+
+#form #notes {
+    font-size: 12px;
+    position: absolute;
+    bottom: 20px; 
+}
+// modal form end 
+
+
+
+//submit a review - section
+@import 'review_form_style'; 
+
+
+
+
+@media screen and (max-width: 768px){
+
+    #header {
+        justify-content: center;
+    }
+
+    #nav-link{
+        margin: 0 20px;
+    }
+
+    
+    
+}
+
+
+
+@media screen and (max-width: 630px){
+
+
+    // Header start
+    #menu {
+        display: block;
+        margin-left: 5px;
+        padding-top: 5px;
+        background-color: whitesmoke;
+        color: black;
+        font-weight: 600;
+        width: 50px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    #header-img {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+
+    #header {
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    #nav-bar {
+        position: absolute;
+        display: block;
+        top: 50px;
+        width: 200px;
+        text-align: left;
+        box-sizing: border-box;
+        margin-top: 0;
+        background-color: whitesmoke;
+        color: black;
+        font-weight: 600;
+        box-shadow: 1px 2px 5px 2px rgba(100,100,100,0.5);
+        display: none;
+    }
+
+    .nav-link {
+        display: block; 
+        margin-left: 0%;
+        padding-left: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        
+    }
+
+
+    .nav-link:nth-child(even) {
+        background-color: white;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(100,100,100,0.1);
+    }
+
+    #menu:hover ~ #nav-bar {
+        display: block;
+    }
+
+    #menu:hover {
+        background-color: lightgray;
+       
+    }
+
+
+    //header end
+    
+
+
+    //review start
+    
+    #scene{
+        perspective: 10000px;
+        overflow: hidden;
+    }
+    #reviews {
+        width: 175px;
+        height: 200px;
+        max-width: 80%;
+    }
+    
+
+    $translate-500px: translateZ(200px);
+
+    .card-1 {
+        transform: rotateY(360deg) $translate-500px;
+    }
+    
+    .card-2 {
+        transform: rotateY(60deg) $translate-500px;
+    }
+    
+    .card-3{
+        transform: rotateY(120deg) $translate-500px;
+    }
+    
+    .card-4 {
+        transform: rotateY(180deg) $translate-500px; 
+    }
+    
+    .card-5 {
+        transform: rotateY(240deg) $translate-500px; 
+    }
+    
+    .card-6 {
+        transform: rotateY(300deg) $translate-500px;    
+    }
+
+
+    //submit a review - section
+    #review-container {
+        height: 300px;
+    }
+
+    #review-title h2 {
+        font-size: 18px;
+    }
+    
+
+    #review-container label {
+        font-size: 16px;
+    }
+
+    #comment {
+        height: 75px;
+        font-size: 16px;
+    }
+
+    #submit-review {
+        height: 20px;
+        font-size: 16px;
+    }
+
+}
+
+
+#darkmode-switch {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+#darkmode-switch > label {
+    font-size: 16px;
+    color: gold;
+}
+
+#darkmode-checkbox:not(:checked) ~ label {
+    color: gray;
+}
+
+
+//white-mode
+
+.white-mode {
+    background-color: white;
+    color: black;
+}
+
