@@ -1,8 +1,8 @@
-function sendText( ) {
-    //Write your code here.
+function sendText(firstName, lastName ) {
+    console.log (`Hello ${firstName} ${lastName}, classes today are suspended.`)
 }
-sendText()
 
+sendText()
 
 sendText('Jose', 'Rizal')
 sendText('Manny', 'Pacquiao')
