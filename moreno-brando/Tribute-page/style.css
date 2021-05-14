@@ -1,19 +1,99 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: white;
+<<<<<<< HEAD
+=======
+    margin: 0;
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 }
 
 #main {
     text-align: center;
 }
 
+<<<<<<< HEAD
 #container{
     background-image: url("assets/background-image.jpg");
+
+=======
+#header {
+    height: 50px;
+    background-color: black;
+    box-shadow: 0 5px 5px rgba(255,255,255,0.5);
+    display: flex;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index:  1;
+    align-items: center;
 
 }
 
 
+#navBar{
+    width: 100%;
+    list-style: none;    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    height: 30px;
+}
+
+#navBar li{
+    box-shadow: 0 0 2px 2px rgba(255,255,255,0.2);
+    padding: 5px 10px;
+    background-image: linear-gradient(to right, blue,black,black, blue);
+    border-radius: 5px;
+}
+
+#navBar li a{
+    text-decoration: none;
+    color: white;
+}
+
+
+#navBar li:hover{
+    background-image: linear-gradient(to right bottom, blue,black,blue);
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+#navBar li a:active {
+    color: red;
+}
+
+#companies-navBar {
+    position: relative;
+}
+
+
+#companies-navBar:hover #dropdown {
+    display: block;
+}
+
+#dropdown {
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    width: 200px;
+    float: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,15px);
+    box-shadow: 0 0 5px 5px rgba(255,255,255,0.2);
+    display: none;
+}
+
+
+#container{
+    background-image: radial-gradient(black, black, darkblue, black, black);
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
+}
+
+
 #title {
+<<<<<<< HEAD
     font-size: 50px;
     font-weight: 700;
     display: block;
@@ -21,21 +101,48 @@ body {
     background-image: linear-gradient(to right, orange, skyblue, gray);
     position: sticky;
     top: 0px;
+=======
+    display: block;
+    position: relative;
+    top: 40px;
+    width: 80%;
+    margin: auto;
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
+    border-radius: 10px;
+    text-transform: uppercase;
+
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 }
 
 
 #image {
+<<<<<<< HEAD
     width: 60%; /* 8. As a user, I want the **img element** to be **responsive** to resizing, relative to the width of its parent element.*/
     padding: 30px;
     background-image: linear-gradient(orange, skyblue, gray);
     border-radius: 3px;
 }
 
+=======
+    width: 80%; /* 8. As a user, I want the **img element** to be **responsive** to resizing, relative to the width of its parent element.*/
+    margin: 20px auto 20px auto;
+    box-shadow: 0 0 5px 5px rgba(255,255,255,0.2);
+    border-radius: 10px;
+    filter: opacity(0.8) contrast(1.2);
+}
+
+
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 #img-div{
     text-align: center;
     
 }
 
+<<<<<<< HEAD
 #img-caption{
     color: white;
     font-size: 15px;
@@ -63,12 +170,50 @@ body {
 button {
     background-image:linear-gradient(orange, gray);
     color: white;
+=======
+
+#img-caption{
+    width: 80%;
+    margin: auto;
+    font-style: italic;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px 10px ;
+    border-radius: 10px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
+}
+
+
+#tribute-info{
+    width: 80%;
+    margin: 50px auto 50px auto;
+    box-sizing: border-box;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.5;
+    padding: 30px;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px blue;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
+    border-radius: 10px;
+    
+}
+
+
+
+button {
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     font-size: 20px;
     border-style: none;
     border-radius: 5px;
     width: 300px;
     height: 40px;
     text-transform: uppercase;
+<<<<<<< HEAD
 }
 
 a :hover{
@@ -76,13 +221,34 @@ a :hover{
     color: white;
 }
 
+=======
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px 5px rgba(255,255,255,0.2);
+}
+
+
+a :hover{
+    background-image: linear-gradient(to right bottom, blue,black,blue);
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+a :active {
+    color: red;
+}
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 
 #section{
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+<<<<<<< HEAD
     background-image: url("assets/background-image-2.jpg");
+=======
+    background-image: url("assets/background-image.jpg");
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     background-attachment: fixed;
     background-repeat: none;
     background-size: cover;
@@ -94,6 +260,7 @@ a :hover{
     padding-bottom: 10px;
     border-top: 3px ridge gray;
     font-size: 22px;
+<<<<<<< HEAD
     width: 90%;
     
 }
@@ -122,6 +289,48 @@ h2{
 }
 
 ul {
+=======
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px 5px rgba(255,255,255,0.2);
+}
+
+
+h1{
+    width: 100%;
+    margin:auto;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;  
+    background-color: rgba(10,0,255,0.3);
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
+}
+
+
+h2{
+    background-color: rgba(0,0,255,0.3);
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+
+#introduction {
+    box-sizing: border-box;
+    margin: 50px 0;
+    padding: 30px;
+    background-color: rgba(0,0,255,0.2);
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
+    line-height: 1.5;
+    width: 100%;
+
+}
+
+
+#companies {
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     list-style: none;
     padding-inline-start: 0;
     width: 80%;
@@ -129,14 +338,48 @@ ul {
 
 }
 
+<<<<<<< HEAD
 li {
+=======
+
+#companies li {
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     min-height: 250px;
     margin-top: 50px;
     padding: 50px;
     float: left;
+<<<<<<< HEAD
     border-radius: 3px;
     border-top: 3px gray ridge;
     background-image: linear-gradient(orange, gray);
     color: white;
     
 }
+=======
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
+    border-radius: 10px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+
+@media (max-width: 425px) {
+
+    #title {
+        font-size: 20px;
+    }
+    #tribute-info {
+        font-size: 16px;
+    }
+
+    #article {
+        font-size: 18px;
+    }
+    #companies li {
+        font-size: 16px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+>>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6

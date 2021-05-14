@@ -1,0 +1,66 @@
+body {
+    background-color: rgba(0,0,0,0.9);
+    color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+@import 'form-partial';
+
+#thank-you {
+    @extend %form-shared;
+    position: absolute;
+    line-height: 1.75;
+    color: gold;
+}
+
+h2, #confirmation-email {
+    margin-top: 50px;
+}
+
+#return {
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+}
+
+#return:hover, #return-button:hover, a:hover{
+    background-color: gray;
+    cursor: pointer;
+    color: gold;
+}
+
+
+#return-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 25px;
+}
+
+#thank-you > img {
+    position: absolute;
+    width: 50px;
+    bottom: 10px;
+    right: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+#email-address {
+    color: white;
+}
+
+
+#rating-value {
+    font-weight: 600;
+    color: whitesmoke;
+    font-size: 50px;
+    display: block;
+    text-align: center;
+}
