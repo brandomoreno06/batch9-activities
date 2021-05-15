@@ -107,3 +107,48 @@ var header = document.getElementById('header');
 darkmodeCheckbox.addEventListener ('change', function() {
     mainBody[0].classList.toggle('white-mode');
 })
+
+
+
+
+//adding coding challenge - counter application 
+
+var reviewTitle = document.getElementById('review-title');
+reviewTitle.innerHTML = '<h2>Please leave a review<h2>';
+
+
+var counterApplication = document.createElement('div');
+var body = document.getElementsByTagName('body');
+body[0].appendChild(counterApplication);
+
+var counterApplicationContent = document.createElement('div');
+counterApplication.appendChild(counterApplicationContent);
+counterApplicationContent.innerHTML = '<h4>Enjoyed this page? Hit heart button.<h4><br><span id="heart-button">&#128420;</span><br><span id="heart-count"></span>';
+
+var heartButton = document.getElementById('heart-button');
+heartButton.style.fontSize = '30px';
+heartButton.style.cursor = 'pointer';
+
+var heartCount = document.getElementById('heart-count');
+
+heartButton.onclick = function() {
+    counter += 1;
+    heartCount.innerText = counter; //update the content for every click
+    localStorage.setItem("counter", counter); //store the last counter locally
+}
+
+
+
+window.onload = function() {
+     counter = parseInt(localStorage.getItem("counter")); //get thelast stored counter
+
+    if(counter > 0) {
+        heartCount.innerText = counter;
+    }
+
+    else {
+        counter = 0;
+        heartCount.innerText = counter;
+    }
+}
+
