@@ -1,0 +1,220 @@
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: url("/assets/long-exposure-of-a-waterfall-in-nature.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#set-up-page {
+  display: block;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+#time-container {
+  width: 100%;
+  max-width: 95%;
+  height: 10%;
+  position: absolute;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12vh;
+  display: grid;
+  place-content: center;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+}
+
+.time-transition {
+  font-size: 15vh;
+  transition: font-size 0.5s ease;
+}
+
+#set-up-page > #setup-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#input-section {
+  width: 550px;
+  max-width: 95%;
+  height: 200px;
+  text-align: center;
+  position: relative;
+}
+
+#input-section > label {
+  font-size: 25px;
+}
+
+.input-field {
+  width: 90%;
+  height: 40px;
+  font-size: 30px;
+  text-align: center;
+  outline: none;
+  border-style: none;
+  border-bottom: 3px solid black;
+  background-color: transparent;
+}
+
+#input-button {
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  margin: auto;
+  margin-top: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+#input-button:hover {
+  font-weight: bold;
+}
+
+#input-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 250, 250, 0.4);
+  box-shadow: 0 2px 5px 2px rgba(25, 25, 25, 0.5);
+  border-radius: 5px;
+  z-index: -1;
+}
+
+#main-container {
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20% 30% 30% 20%;
+  grid-template-areas: "grid-row-header" "grid-row-1" "grid-row-2" "grid-row-3" "row-footer";
+  display: none;
+  place-content: center;
+  display: grid;
+}
+
+.row-header {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-header;
+}
+
+.row-1 {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-1;
+  text-align: center;
+  font-size: 6vh;
+  display: grid;
+  place-content: center;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+}
+
+.row-2 {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-2;
+  display: grid;
+  place-content: center;
+}
+
+.row-2 > #main-focus-container {
+  width: 550px;
+  max-width: 95vw;
+  height: 200px;
+  text-align: center;
+  position: relative;
+}
+
+.row-2 > #main-focus-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 250, 250, 0.4);
+  box-shadow: 0 2px 5px 2px rgba(25, 25, 25, 0.5);
+  border-radius: 5px;
+  z-index: -1;
+}
+
+#main-focus-container > label {
+  font-size: 25px;
+}
+
+#main-focus-container > #button-main-focus {
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  margin: auto;
+  margin-top: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+#button-main-focus:hover {
+  font-weight: bold;
+}
+
+#mainfocus:disabled {
+  border: none;
+  font-size: 35px;
+  color: black;
+}
+
+#edit-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: gray;
+  font-size: 25px;
+  padding-bottom: 20px;
+  display: none;
+}
+
+#main-focus-container:hover #edit-button {
+  display: block;
+}
+
+.row-3 {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-3;
+}
+
+.row-footer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-footer;
+}
+
+/*# sourceMappingURL=style.css.map */

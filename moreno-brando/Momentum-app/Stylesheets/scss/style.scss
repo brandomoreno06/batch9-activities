@@ -1,0 +1,234 @@
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-image: url('/assets/long-exposure-of-a-waterfall-in-nature.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+@mixin backdrop-filter {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(250,250,250,0.4);
+    box-shadow: 0 2px 5px 2px rgba(25,25,25,0.5);
+    border-radius: 5px;
+    z-index: -1;
+}
+
+
+//Set-up Page
+
+#set-up-page {
+    display: block;
+    height: 100%;
+    width: 100%;
+    display: none; //to remove............
+}
+
+$text-shadow: 0 2px 5px rgba(25,25,25,1);
+
+#time-container{
+    width: 100%;
+    max-width: 95%;
+    height: 10%;
+    position: absolute;
+    top: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12vh;
+    display: grid;
+    place-content: center;
+    color: white;
+    text-shadow: $text-shadow; 
+}
+
+.time-transition {
+    font-size: 15vh;
+    transition: font-size 0.5s ease;
+}
+
+
+
+#set-up-page > #setup-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#input-section {
+    width: 550px;
+    max-width: 95%;
+    height: 200px;
+    text-align: center;
+    position: relative;
+}
+
+#input-section > label {
+    font-size: 25px;
+}
+
+
+$input-height: 40px;
+
+.input-field {
+    width: 90%;
+    height: $input-height;
+    font-size: 30px;
+    text-align: center;
+    outline: none;
+    border-style: none;
+    border-bottom: 3px solid black;;
+    background-color: transparent;
+}
+
+@mixin input-button {
+    height: $input-height;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    margin: auto;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+#input-button {
+    @include input-button();
+    display: none;
+}
+
+#input-button:hover {
+    font-weight: bold;
+}
+
+
+#input-section::before {
+    @include backdrop-filter();
+}
+
+
+
+
+
+
+
+//HomePage - Main content
+#main-container {
+    height: 100%;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20% 30% 30% 20%;
+    grid-template-areas: 'grid-row-header' 'grid-row-1' 'grid-row-2' 'grid-row-3' 'row-footer' ;
+    display: none;
+    place-content: center;
+    display: grid; //to remove........................
+}
+
+@mixin rows {
+    width: 100%;
+    height: 100%;
+    // border: 1px solid lightblue;
+    margin: 0;
+}
+
+.row-header {
+    @include rows();
+    grid-area: grid-row-header;
+    
+}
+
+.row-1 {
+    @include rows();
+    grid-area: grid-row-1;
+    text-align: center;
+    font-size: 6vh;
+    display: grid;
+    place-content: center;
+    color: white;
+    text-shadow: $text-shadow;
+}
+
+.row-2 {
+    @include rows();
+    grid-area: grid-row-2;
+    display: grid;
+    place-content: center;
+}
+
+.row-2 > #main-focus-container{
+    width: 550px;
+    max-width: 95vw;
+    height: 200px;
+    text-align: center;
+    position: relative;
+}
+
+
+.row-2 > #main-focus-container::before {
+    @include backdrop-filter();
+}
+
+#main-focus-container > label {
+    font-size: 25px;
+}
+
+
+#main-focus-container > #button-main-focus {
+    @include input-button();
+    display: none;
+}
+
+
+#button-main-focus:hover {
+    font-weight: bold;
+}
+
+#mainfocus:disabled {
+    border: none;
+    font-size: 35px;
+    color: black;
+}
+
+
+#edit-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: gray;
+    font-size: 25px;
+    padding-bottom: 20px;
+    display: none;
+}
+
+#main-focus-container:hover  #edit-button {
+    display: block;
+}
+
+
+
+.row-3 {
+    @include rows();
+    grid-area: grid-row-3;
+}
+
+.row-footer {
+    @include rows();
+    grid-area: grid-row-footer;
+}
