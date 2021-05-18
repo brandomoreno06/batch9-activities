@@ -248,3 +248,45 @@ function randomQuote() {
 randomQuote();
 setInterval(randomQuote, 10000);
 
+
+
+
+//Todo List
+
+var todoContainer = document.getElementById('todo-container');
+var newToDo = document.getElementById('newtodo');
+var addToDoButton = document.getElementById('plus-button');
+var toDoList = document.getElementById('todo-list');
+
+
+var todoArray = [];
+
+function addToDo() {
+    if (newToDo.value.trim().length > 0) {
+    todoArray.push(newToDo.value);
+
+    toDoList.innerHTML += "<div class='todo-item'><input type='checkbox' name='todocheckbox' class='todo-checkbox'>" + " " + newToDo.value + "<span  class='remove-todo'>&times;</span></div>"
+    newToDo.value = "";
+    
+    }
+    else {
+        return;
+    }
+
+    //modify items on click
+    var removeButton = document.getElementsByClassName('remove-todo');
+    var todoItems = document.getElementsByClassName('todo-item');
+    var todoCheckBoxes = document.getElementsByClassName('todo-checkbox');
+
+
+    for (let i = 0; i < todoCheckBoxes.length; i++) {
+    todoCheckBoxes[i].addEventListener('change', function(){
+        todoCheckBoxes[i].parentElement.classList.add('completed');
+    })
+    }
+
+}
+
+addToDoButton.onclick = addToDo;
+
+
