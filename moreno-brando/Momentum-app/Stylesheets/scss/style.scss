@@ -6,6 +6,7 @@ body {
     background-image: url('/assets/long-exposure-of-a-waterfall-in-nature.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: black;
 }
 
 * {
@@ -14,6 +15,7 @@ body {
     -moz-box-sizing: border-box;
 }
 
+$box-shadow:  0 2px 5px 2px rgba(25,25,25,0.5);
 @mixin backdrop-filter {
     content: "";
     position: absolute;
@@ -22,7 +24,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: rgba(250,250,250,0.4);
-    box-shadow: 0 2px 5px 2px rgba(25,25,25,0.5);
+    box-shadow: $box-shadow;
     border-radius: 5px;
     z-index: -1;
 }
@@ -44,7 +46,7 @@ $text-shadow: 0 2px 5px rgba(25,25,25,1);
     max-width: 95%;
     height: 10%;
     position: absolute;
-    top: 10vh;
+    top: 20vh;
     left: 50%;
     transform: translateX(-50%);
     font-size: 12vh;
@@ -176,13 +178,9 @@ $input-height: 40px;
     position: relative;
 }
 
-
-.row-2 > #main-focus-container::before {
-    @include backdrop-filter();
-}
-
 #main-focus-container > label {
     font-size: 25px;
+    text-shadow: 0 0 5px rgba(250,250,250,1);
 }
 
 
@@ -198,8 +196,17 @@ $input-height: 40px;
 
 #mainfocus:disabled {
     border: none;
-    font-size: 35px;
-    color: black;
+    font-size: 40px;
+    color: white;
+    text-shadow: $text-shadow;
+    height: auto;
+    transition: font-size 0.5s ease;
+}
+
+#main-focus-container.active-background {
+    background-color: rgba(250,250,250,0.4);
+    box-shadow: $box-shadow;
+    border-radius: 5px;
 }
 
 
@@ -211,22 +218,207 @@ $input-height: 40px;
     height: 25px;
     cursor: pointer;
     border-radius: 5px;
-    color: gray;
+    color: white;
     font-size: 25px;
     padding-bottom: 20px;
     display: none;
 }
 
-#main-focus-container:hover  #edit-button {
-    display: block;
-}
-
-
 
 .row-3 {
     @include rows();
     grid-area: grid-row-3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+#quotes {
+    height: 50%;
+    width: 90%;
+    max-width: 800px;
+}
+
+#plus-quote {
+    font-size: 30px;
+    cursor: pointer;
+    margin: auto;
+    color: white;
+    text-shadow: $text-shadow;
+    text-align: center;
+    display: block;
+    visibility: hidden;
+}
+
+#quotes:hover #plus-quote {
+    visibility: visible;
+}
+
+#quotes-display-container {
+    color: white;
+    text-shadow: $text-shadow;
+    text-align: center;
+    font-size: 18px;
+}
+
+
+#add-quote-modal::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(25,25,25,0.9);
+}
+
+#add-quote-modal {
+    display: none;
+}
+
+#add-quote-modal.active {
+    display: block;
+}
+
+
+#add-quote-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 95%;
+    max-width: 550px;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(250,250,250,1);
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+}
+
+#add-quote-container > textarea {
+    width: 95%;
+    height: 130px;
+    resize: none;
+    margin: auto;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 5px;
+    font-family: inherit;
+    font-size: 18px;
+    padding: 10px;
+}
+
+
+#add-quote-container > ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+}
+
+ul #added-notification {
+    position: absolute;
+    padding-top: 5px;
+    color: rgb(130, 211, 8);;
+    font-weight: bold;
+    display: none;
+    transition: all 0.5s ease;
+}
+
+#added-notification.active-notification {
+    display: block;
+    animation: scale 0.5s;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.button-quote {
+    display: inline;
+    width: 60px;
+    height: 25px;
+    border: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.button-quote:active {
+    font-weight: bold;
+}
+
+
+#add-quote-container h2::before {
+    content: 'No need to put quotation marks ( " " )';
+    position: absolute;
+    font-size: 10px;
+    color: gray;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70px;
+}
+
+#close-button {
+    content: '+';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    color: gray;
+    font-size: 25px;
+    right: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+#close-button:hover {
+    color: black;
+}
+
+
+#quotes-list {
+    height: 300px;
+    overflow: scroll;
+}
+
+
+#quotes-list > div {
+    text-align: left;
+    padding: 10px 10px;
+    border-top: 1px solid lightgray;
+    position: relative;
+}
+
+#quotes-list > div:hover {
+    background-color: lightgray;
+}
+
+#quotes-list > div:hover .remove {
+    display: block;
+}
+
+.remove {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+    display: none;
+    cursor: pointer;
+}
+
+
+
 
 .row-footer {
     @include rows();
