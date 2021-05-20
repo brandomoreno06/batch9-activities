@@ -124,9 +124,31 @@ body {
   text-align: center;
   font-size: 6vh;
   display: grid;
+  grid-template-columns: auto auto;
   place-content: center;
   color: white;
   text-shadow: 0 2px 5px #191919;
+}
+
+#display-name {
+  font-size: 6vh;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+  max-width: 300px;
+  border-style: none;
+  outline-offset: 8px;
+}
+
+#edit-name {
+  font-size: 20px;
+  cursor: pointer;
+  visibility: hidden;
+  position: relative;
+  left: 15px;
+}
+
+#greetings:hover #edit-name {
+  visibility: visible;
 }
 
 .row-2 {
@@ -371,15 +393,37 @@ ul #added-notification {
   display: block;
 }
 
+#quotes-list > div:hover .edit-quote {
+  display: block;
+}
+
 .remove {
   position: absolute;
   top: 0;
   right: 5px;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
   color: red;
   display: none;
   cursor: pointer;
+}
+
+.remove:hover {
+  font-weight: bold;
+}
+
+.edit-quote {
+  color: gray;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 15px;
+  display: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.edit-quote:hover {
+  font-weight: bold;
 }
 
 .row-footer {
@@ -404,6 +448,22 @@ ul #added-notification {
 
 #todo-container.active-container {
   display: block;
+}
+
+#todo-container h2 {
+  text-align: center;
+}
+
+#close-todo {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#close-todo:hover {
+  color: white;
 }
 
 #newtodo {
@@ -446,7 +506,7 @@ ul #added-notification {
 #todo-list > div {
   padding: 10px;
   min-height: 30px;
-  background-color: rgba(25, 25, 25, 0.1);
+  background-color: rgba(25, 25, 25, 0.2);
   border-radius: 5px;
   margin: 10px 0;
   box-shadow: 0 0 2px rgba(25, 25, 25, 0.8);

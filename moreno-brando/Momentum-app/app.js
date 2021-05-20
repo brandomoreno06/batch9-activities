@@ -17,15 +17,14 @@ function displayTime() {
         if (hourNow < 12) {
             greeting = "Good Morning";
         }
-        else if (hourNow > 12 && hourNow < 18) {
+        else if (hourNow >= 12 && hourNow < 18) {
             greeting = "Good Afternoon";
         }
         else {
             greeting = "Good Evening"
-        }
-
-        
-    }
+        }       
+        showMainContent();
+    }  
 }
 
 window.onload = displayTime();
@@ -53,16 +52,48 @@ inputName.oninput = function () {
 var homePage = document.getElementById('main-container');
 var setUpPage = document.getElementById('set-up-page');
 var greetings = document.getElementById('greetings');
+var displayName;
 
-function showMainContent() {
+
+
+function getName() {
+    displayName = localStorage.getItem("name");
+}
+getName();
+
+
+function displayGreeting() {
     homePage.style.display = 'grid';
     setUpPage.style.display = 'none';
     timeNow.className += ' time-transition';
-    greetings.innerHTML = greeting + ", " + inputName.value //display entered name
-    mainFocusContainer.classList.add('active-background');
+    greetings.innerHTML = greeting + ", " + displayName + "<span id='edit-name'>&#9998;</span>"; 
+
+    var editName = document.getElementById('edit-name');
+    editName.addEventListener('click', function() {
+        displayName = localStorage.clear("name");
+        location.reload();
+    })
 }
 
-inputButton.addEventListener('click', showMainContent);
+function showMainContent() { //function called on window.onload
+    if (displayName != null) {
+        displayGreeting();
+    }  
+    else {
+      return; 
+    }
+}
+
+function setUpName() {
+    displayName = inputName.value;
+    localStorage.setItem("name", displayName); //save name in local storage
+    displayGreeting();
+}
+
+// localStorage.clear("name");
+
+//Event listeners on setUpName in setUpPage
+inputButton.addEventListener('click', setUpName);
 
 inputName.addEventListener('keyup', e => {
    if (e.key === "Enter") {
@@ -75,7 +106,8 @@ inputName.addEventListener('keyup', e => {
 
 
 
-//Main focus for today
+
+//Main focus for today SECTION
 var mainFocus = document.getElementById('mainfocus');
 var mainFocusLabel = document.getElementById('main-focus-label');
 var mainFocusButton = document.getElementById('button-main-focus');
@@ -98,12 +130,28 @@ mainFocus.onfocus = mainFocusFunction; //show ok button after clicking edit;
 
 
 
-mainFocusButton.onclick = function() {
+//Display mainfocus with entered input
+function displayMainFocus() {
     mainFocusLabel.innerHTML = '<h4>Main Focus Today</h4>';
     mainFocus.setAttribute('disabled', true);
     mainFocusButton.style.display = 'none';
-    editButton.style.display = 'block';
+    mainFocusContainer.classList.remove('active-background');
+    localStorage.setItem("mainfocus", mainFocus.value);//store value in local storage
 }
+
+//get value from local storage
+function getMainFocus() {
+    mainFocus.value = localStorage.getItem("mainfocus");
+}
+getMainFocus(); //call to get saved mainFocus.value on load;
+
+
+if (mainFocus.value != null || mainFocus.value != "") {
+    getMainFocus();
+}
+
+//onclick of OK button after entering input
+mainFocusButton.onclick = displayMainFocus;
 
 mainFocus.addEventListener('keyup', e => {
     if (e.key === "Enter") {
@@ -114,7 +162,7 @@ mainFocus.addEventListener('keyup', e => {
 })
 
 
-
+//style background on hover
 mainFocusContainer.onmouseover = function () {
     mainFocusContainer.classList.add('active-background');
 
@@ -132,12 +180,14 @@ mainFocusContainer.onmouseout = function () {
 }
 
 
-
+//onclick of edit button
 editButton.onclick = function () {
     mainFocusLabel.innerHTML = '<h4>What is your main focus for today?</h4>';
     mainFocus.removeAttribute('disabled');
     mainFocus.focus();
 }
+
+
 
 
 //Quote Modal - Open and Close
@@ -173,7 +223,8 @@ quoteModal.addEventListener('keyup', function(e) {
     }
 })
 
-//Add New Quote Container
+
+//Add New Quote Container (Modal)
 
 const quote1 = "One way to keep momentum going is to have constantly greater goals.";
 
@@ -181,30 +232,71 @@ const quote2 = "Your chances of success are directly proportional to the degree 
 
 const quote3 = "Success isn't measured by money or power or social rank. Success is measured by your discipline and inner peace.";
 
-let quotes = [quote1, quote2, quote3];
 
 var addButton = document.getElementById('add-button');
 var clearButton = document.getElementById('clear-button');
 var inputQuote = document.getElementById('input-quote');
 var displayedQuoteContainer = document.getElementById('quotes-display-container');
 var addedNotification = document.getElementById('added-notification');
+var quotesListContainer = document.getElementById('quotes-list');
 
 
-function addQuote() {
-    if (inputQuote.value.trim().length > 0) {
-    quotes.push(inputQuote.value);
-    var newAddedQuote = document.createElement('div');
-    newAddedQuote.innerHTML = inputQuote.value;
-    quotesList.appendChild(newAddedQuote);
+//How Added Quotes (method to display input quote)
+function showQuote(quoteContent) {
+    var newQuoteList = document.createElement('div');
+
+    var newQuote = document.createElement('span');
+    newQuote.textContent = quoteContent;
+    newQuote.classList.add('quote-item');
+
+    var removeQuote = document.createElement('span');
+    removeQuote.innerHTML = '&times';
+    removeQuote.classList.add('remove');
+
+    var editQuote = document.createElement('span');
+    editQuote.innerHTML = '&#9998;';
+    editQuote.classList.add('edit-quote');
+
+    quotesListContainer.appendChild(newQuoteList);
+    newQuoteList.appendChild(newQuote);
+    newQuoteList.appendChild(editQuote);
+    newQuoteList.appendChild(removeQuote);
+
+
     inputQuote.value = "";
 
-    addedNotification.classList.add('active-notification');
-    setTimeout(function(){ 
-        addedNotification.classList.remove('active-notification')
-    },2000)
-    }
-    else {
-        return;
+    addedNotification.classList.toggle('active-notification');
+
+    //show notification when added new quote
+    setTimeout(function() { 
+        addedNotification.classList.remove('active-notification');
+    }, 2000)
+
+    //add event listener for each quote
+    removeQuote.addEventListener('click', function() {
+        this.parentElement.classList.add('deleted-quote-div');
+        var deletedQuote  = document.querySelector(".deleted-quote-div .quote-item"); //find the child textContent/quote of the "deleted-quote-div" parent.
+        let i = quotes.indexOf(deletedQuote.textContent); //find index of deletedQuote onm the exisiting quote array;
+
+        quotes.splice(i, 1); //remove the quote from array
+        saveQuotes();
+        this.parentElement.remove();
+       
+    })
+
+
+}
+
+
+function saveQuotes() {
+    localStorage.setItem("quotes", JSON.stringify(quotes))
+}
+
+function getQuotes() {
+    quotes = JSON.parse(localStorage.getItem("quotes"));
+
+    if (!quotes || quotes.length < 3) {
+        quotes = [quote1, quote2, quote3];
     }
 }
 
@@ -212,28 +304,38 @@ function clearInput() {
     inputQuote.value = "";
 }
 
+let quotes = [quote1, quote2, quote3];
+
+
+//Add new quote 
+function addNewQuote() {
+    if(inputQuote.value.trim().length > 0 ) {
+        quotes.push(inputQuote.value); //push to existing  array
+        showQuote(inputQuote.value); //display on DOM
+        saveQuotes(); //save to local storage the mutated quote array
+    }
+}
+
+
+function displayQuotesInitial() {
+    getQuotes(); //get value if any quotes are stored
+
+    for(let i = 0; i < quotes.length; i++) {
+        showQuote(quotes[i]);
+    }
+}
+displayQuotesInitial();  //display saved quotes onload
+
+
+//Event listeners for (Input quote)
+clearButton.onclick = clearInput;
+addButton.onclick = addNewQuote;
 inputQuote.addEventListener('keyup', function(e) {
     if(e.key === "Enter") {
         addButton.click();
     }
 })
 
-
-clearButton.onclick = clearInput;
-addButton.onclick = addQuote;
-
-
-
-//Quotes' list
-var quotesList = document.getElementById('quotes-list');
-
-function addQuoteInList() {
-for (let i = 0; i < quotes.length; i++) {
-    var newQuote = document.createElement('div');
-    newQuote.innerHTML = quotes[i] + "<span class=remove>&times</span>";
-    quotesList.appendChild(newQuote);
-}}
-addQuoteInList();
 
 
 
@@ -251,22 +353,29 @@ setInterval(randomQuote, 10000);
 
 
 
-
-
-
-
-
-
 //Todo App
 
 var todoContainer = document.getElementById('todo-container');
 var newToDo = document.getElementById('newtodo');
 var addToDoButton = document.getElementById('plus-button');
 var toDoList = document.getElementById('todo-list');
+var openTodo = document.getElementById('todo-button');
+var closeToDo = document.getElementById("close-todo");
 
-    //create a function to show todo items
-var showToDo = function (toDoItemTextContent) {
+//Show todo Container
+openTodo.onclick = function () {
+    todoContainer.classList.toggle('active-container');
+}
 
+closeToDo.onclick = function() {
+    todoContainer.classList.toggle('active-container');
+}
+
+
+
+
+//create a function to show todo items
+function showToDo (toDoItemTextContent) {
     let ToDoItemContainer = document.createElement('div');
     ToDoItemContainer.className = "todo-item";
 
@@ -279,67 +388,54 @@ var showToDo = function (toDoItemTextContent) {
     todoCheckBox.className = "todo-checkbox";
 
     let todoItem = document.createElement('span');
+    todoItem.className = "text-content";
     todoItem.textContent = toDoItemTextContent;
 
     toDoList.appendChild(ToDoItemContainer);
     ToDoItemContainer.appendChild(todoCheckBox);
     ToDoItemContainer.appendChild(todoItem);
     ToDoItemContainer.appendChild(removeButton);
-    
+
     newToDo.value = "";
 
-    //Save todoArray in local storage;
-    localStorage.setItem("todoArray", JSON.stringify(todoArray));
 
-    modifyTodoItems();
-}
-
-
-function modifyTodoItems () {
     //modify items on click and change event
-    var removeButtons = document.getElementsByClassName('remove-todo');
-    var ToDoItemContainers = document.getElementsByClassName('todo-item');
-    var todoCheckBoxes = document.getElementsByClassName('todo-checkbox');
+    
+    todoCheckBox.addEventListener('change', function(){
+        if(this.checked) {
+            this.parentElement.classList.add('completed');
+        }
+        else {
+            this.parentElement.classList.remove('completed');
+        }
+    })
 
 
-    for (let i = 0; i < todoCheckBoxes.length; i++) {
-        todoCheckBoxes[i].addEventListener('change', function(){
-            if(this.checked) {
-                this.parentElement.classList.add('completed');
-            }
-            else {
-                this.parentElement.classList.remove('completed');
-            }
-        })
-    }
-
-
-    for (let i = 0; i < removeButtons.length; i++) {
-        removeButtons[i].addEventListener('click', function() {
-            this.parentElement.remove();
-            todoArray.splice(i, 1);
-            localStorage.setItem("todoArray", JSON.stringify(todoArray));
-            // savedToDo = JSON.parse(localStorage.getItem("todoArray"));
-            console.log(removeButtons.length)
-            console.log(savedToDo);
-        })
-    }
-
+    //remove item on array
+    removeButton.addEventListener('click', function() {
+        this.parentElement.classList.add('deleted');  //Add classlist to parent of removeButton
+        var deleted = document.querySelector(".deleted .text-content"); //get the element with selected query
+        var deletedValue = deleted.textContent;
+        let i = todoArray.indexOf(deletedValue); //find the index of the textContent
+        todoArray.splice(i, 1);
+        this.parentElement.remove(); //remove the parent element on DOM/HTML;
+        saveTodo(); //save spliced todoArray
+    })
+        
 }
 
 
 
-// localStorage.clear("todoArray");
-let savedToDo = JSON.parse(localStorage.getItem("todoArray"));
-let todoArray = savedToDo != null ? savedToDo : [];
+let todoArray = [];
 
 function addToDo() {
     if (newToDo.value.trim().length > 0) {
         todoArray.push(newToDo.value);
         showToDo(newToDo.value);    
+        saveTodo();
     }
 
-   
+
 }
 
 addToDoButton.onclick = addToDo;
@@ -350,17 +446,50 @@ newToDo.addEventListener('keyup', function(e) {
     }
 })
 
-
-for (let i = 0; i < todoArray.length; i++) {
-    showToDo(todoArray[i]);
+   
+//Save todoArray in local storage;
+function saveTodo() {
+    var todoArrayStr = JSON.stringify(todoArray);
+    localStorage.setItem("todoArray", todoArrayStr);
+    
 }
 
-
-
-//Show todo Container
- var openTodo = document.getElementById('todo-button');
- var todoContainer = document.getElementById('todo-container');
-
-openTodo.onclick = function () {
-todoContainer.classList.toggle('active-container');
+function getTodo() {
+    var todoArrayStr = localStorage.getItem("todoArray")
+    todoArray = JSON.parse(todoArrayStr);
+    
+    if(!todoArray) {
+        todoArray = [];
+    }
 }
+
+//Display Todo Onload
+function displayToDoInitial() {
+    getTodo(); //Get values form local storage
+
+    for (let i = 0; i < todoArray.length; i++) {
+        showToDo(todoArray[i]);
+    }
+}
+displayToDoInitial();
+
+
+
+//add even listeners to close modals on escape
+window.addEventListener("keyup", function(e) {
+    if (e.key == "Escape") {
+        //for the todo App
+        if (todoContainer.classList.contains('active-container'))
+        todoContainer.classList.toggle('active-container');
+
+        //for the quotes modal
+        if (quoteModal.classList.contains('active')) {
+            quoteModal.classList.remove('active')
+        }
+    }
+})
+
+
+// localStorage.clear("name")
+// localStorage.clear("mainfocus")
+// localStorage.clear("quotes")
