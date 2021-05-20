@@ -23,7 +23,14 @@ function displayTime() {
         else {
             greeting = "Good Evening"
         }       
-        showMainContent();
+        
+        if (displayName != null) {
+            displayGreeting();
+        }
+
+        if (mainFocus.value.length > 0) {
+            displayMainFocus();
+        }
     }  
 }
 
@@ -56,41 +63,15 @@ var displayName;
 
 
 
-function getName() {
-    displayName = localStorage.getItem("name");
-}
-getName();
-
-
-function displayGreeting() {
-    homePage.style.display = 'grid';
-    setUpPage.style.display = 'none';
-    timeNow.className += ' time-transition';
-    greetings.innerHTML = greeting + ", " + displayName + "<span id='edit-name'>&#9998;</span>"; 
-
-    var editName = document.getElementById('edit-name');
-    editName.addEventListener('click', function() {
-        displayName = localStorage.clear("name");
-        location.reload();
-    })
-}
-
-function showMainContent() { //function called on window.onload
-    if (displayName != null) {
-        displayGreeting();
-    }  
-    else {
-      return; 
-    }
-}
-
 function setUpName() {
     displayName = inputName.value;
-    localStorage.setItem("name", displayName); //save name in local storage
+    localStorage.setItem("username", displayName); //save name in local storage
     displayGreeting();
+    if (mainFocus.value.length > 0)
+    displayMainFocus();
+
 }
 
-// localStorage.clear("name");
 
 //Event listeners on setUpName in setUpPage
 inputButton.addEventListener('click', setUpName);
@@ -104,10 +85,27 @@ inputName.addEventListener('keyup', e => {
 })
 
 
+function getName() {
+    displayName = localStorage.getItem("username");
+}
+getName();
 
 
+function displayGreeting() {
+    homePage.style.display = 'grid';
+    setUpPage.style.display = 'none';
+    timeNow.className += ' time-transition';
+    greetings.innerHTML = greeting + ", " + displayName + "<span id='edit-name'>&#9998;</span>"; 
 
-//Main focus for today SECTION
+    var editName = document.getElementById('edit-name');
+        editName.addEventListener('click', function() {
+        localStorage.removeItem("username");
+        location.reload();
+    })
+}
+
+
+//"Main focus for today" -  SECTION
 var mainFocus = document.getElementById('mainfocus');
 var mainFocusLabel = document.getElementById('main-focus-label');
 var mainFocusButton = document.getElementById('button-main-focus');
@@ -132,11 +130,13 @@ mainFocus.onfocus = mainFocusFunction; //show ok button after clicking edit;
 
 //Display mainfocus with entered input
 function displayMainFocus() {
-    mainFocusLabel.innerHTML = '<h4>Main Focus Today</h4>';
-    mainFocus.setAttribute('disabled', true);
-    mainFocusButton.style.display = 'none';
-    mainFocusContainer.classList.remove('active-background');
-    localStorage.setItem("mainfocus", mainFocus.value);//store value in local storage
+    if(mainFocus.value !== null || mainFocus.value !== "") {
+        mainFocusLabel.innerHTML = '<h4>Main Focus Today</h4>';
+        mainFocus.setAttribute('disabled', true);
+        mainFocusButton.style.display = 'none';
+        mainFocusContainer.classList.remove('active-background');
+        localStorage.setItem("mainfocus", mainFocus.value);//store value in local storage
+    }
 }
 
 //get value from local storage
@@ -144,11 +144,6 @@ function getMainFocus() {
     mainFocus.value = localStorage.getItem("mainfocus");
 }
 getMainFocus(); //call to get saved mainFocus.value on load;
-
-
-if (mainFocus.value != null || mainFocus.value != "") {
-    getMainFocus();
-}
 
 //onclick of OK button after entering input
 mainFocusButton.onclick = displayMainFocus;
@@ -160,6 +155,8 @@ mainFocus.addEventListener('keyup', e => {
          } 
      }
 })
+
+
 
 
 //style background on hover
@@ -490,6 +487,20 @@ window.addEventListener("keyup", function(e) {
 })
 
 
-// localStorage.clear("name")
-// localStorage.clear("mainfocus")
-// localStorage.clear("quotes")
+var resetDefault = document.getElementById("reset-button");
+var resetConfirmation = document.getElementById("reset-confirmation");
+var yesReset = document.getElementById("yes-reset");
+var noReset = document.getElementById("no-reset");
+
+resetDefault.onclick = function() {
+    resetConfirmation.classList.toggle("active-reset-confirmation");
+}
+
+yesReset.onclick = function() {
+    localStorage.clear();
+    location.reload();
+}
+
+noReset.onclick = function() {
+    resetConfirmation.classList.toggle("active-reset-confirmation");
+}
