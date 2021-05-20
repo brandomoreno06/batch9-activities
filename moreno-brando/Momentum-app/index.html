@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momentum App</title>
+    <link rel="stylesheet" href="/Stylesheets/css/style.css">
+</head>
+<body>
+    <div id="set-up-page">
+        <div id="setup-container">
+            <div class="modal" id="input-section">
+                <label for="name"><h4>Hi! Please enter your name.</h4></label>
+                <input type="text" name="name" id=name class="input-field" pattern=".{2,}" required>
+                <button id="input-button" class="input-button-class">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="time-container">
+        <div id="time"></div>
+    </div>
+
+    <div id="main-container">
+        <div class="row-header"></div>
+        <div class="row-1" id="greetings"></div>
+        <div class="row-2">
+            <div id="main-focus-container">
+                <label for="mainfocus" id="main-focus-label"><h4>What is your main focus for today?</h4></label>
+                <input type="text" name="mainfocus" id="mainfocus" class="input-field">
+                <button id="button-main-focus" class="input-button-class">OK</button>
+                <div id="edit-button">&#x270E;</div>
+            </div>
+        </div>
+        <div class="row-3">
+            <div id="quotes">
+                <span id="plus-quote">&plus; &plus; &plus;</span>
+                <div id="quotes-display-container"></div>
+                <div id="add-quote-modal">
+                    <div id="add-quote-container">
+                        <h2>Add a new quote:</h2>
+                        <span id="close-button">&times;</span>
+                        <textarea name="quote" id="input-quote" rows="5" cols="20"></textarea>
+                        <ul>
+                            <li><button id="clear-button" class="button-quote">Clear</button></li>
+                            <li><button id="add-button" class="button-quote">Add</button></li>
+                            <span id="added-notification">New quote added</span>
+                        </ul>
+                        <div id="quotes-list"><h4>Here are your quotes:</h4></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-footer">
+            <div id="todo-container">
+                <h2>To-do List</h2>
+                <span id="close-todo">&times</span>
+                <input type="text" name="newtodo" id="newtodo">
+                <button id="plus-button">&plus;</button>
+                <div id="todo-list"></div>
+            </div>
+            <button id="todo-button">To-do App</button>
+          
+            <button id="reset-button">Reset</button>
+            <div id="reset-confirmation">
+                <span>Are yo sure you want to reset to default values?</span>
+                <ul>
+                    <li><button id="yes-reset">Yes</button></li>
+                    <li><button id="no-reset">No</button></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

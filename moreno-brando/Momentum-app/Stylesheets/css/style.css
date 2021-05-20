@@ -1,0 +1,635 @@
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-image: url("/assets/long-exposure-of-a-waterfall-in-nature.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+#set-up-page {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+#time-container {
+  width: 100%;
+  max-width: 95%;
+  height: 10%;
+  position: absolute;
+  top: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12vh;
+  display: grid;
+  place-content: center;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+}
+
+.time-transition {
+  font-size: 15vh;
+  transition: font-size 0.5s ease;
+}
+
+#set-up-page > #setup-container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#input-section {
+  width: 550px;
+  max-width: 95%;
+  height: 200px;
+  text-align: center;
+  position: relative;
+}
+
+#input-section > label {
+  font-size: 25px;
+}
+
+.input-field {
+  width: 90%;
+  height: 40px;
+  font-size: 30px;
+  text-align: center;
+  outline: none;
+  border-style: none;
+  border-bottom: 3px solid black;
+  background-color: transparent;
+}
+
+#input-button {
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  margin: auto;
+  margin-top: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+#input-button:hover {
+  font-weight: bold;
+}
+
+#input-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(250, 250, 250, 0.4);
+  box-shadow: 0 2px 5px 2px rgba(25, 25, 25, 0.5);
+  border-radius: 5px;
+  z-index: -1;
+}
+
+#main-container {
+  height: 100%;
+  width: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20% 30% 30% 20%;
+  grid-template-areas: "grid-row-header" "grid-row-1" "grid-row-2" "grid-row-3" "row-footer";
+  display: none;
+  place-content: center;
+}
+
+.row-header {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-header;
+}
+
+.row-1 {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-1;
+  text-align: center;
+  font-size: 6vh;
+  display: grid;
+  grid-template-columns: auto auto;
+  place-content: center;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+}
+
+#display-name {
+  font-size: 6vh;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+  max-width: 300px;
+  border-style: none;
+  outline-offset: 8px;
+}
+
+#edit-name {
+  font-size: 20px;
+  cursor: pointer;
+  visibility: hidden;
+  position: relative;
+  left: 15px;
+}
+
+#greetings:hover #edit-name {
+  visibility: visible;
+}
+
+.row-2 {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-2;
+  display: grid;
+  place-content: center;
+}
+
+.row-2 > #main-focus-container {
+  min-width: 700px;
+  max-width: 95%;
+  height: 200px;
+  text-align: center;
+  position: relative;
+  padding-left: 20px;
+}
+
+#main-focus-container > label {
+  font-size: 25px;
+  text-shadow: 0 0 5px #fafafa;
+}
+
+#main-focus-container > #button-main-focus {
+  height: 40px;
+  font-size: 20px;
+  border: none;
+  background-color: transparent;
+  margin: auto;
+  margin-top: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+#button-main-focus:hover {
+  font-weight: bold;
+}
+
+#mainfocus:disabled {
+  border: none;
+  font-size: 40px;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+  height: auto;
+  transition: font-size 0.5s ease;
+}
+
+#main-focus-container.active-background {
+  background-color: rgba(250, 250, 250, 0.4);
+  box-shadow: 0 2px 5px 2px rgba(25, 25, 25, 0.5);
+  border-radius: 5px;
+}
+
+#edit-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+  font-size: 25px;
+  padding-bottom: 20px;
+  display: none;
+}
+
+.row-3 {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#quotes {
+  height: 50%;
+  width: 90%;
+  max-width: 800px;
+}
+
+#plus-quote {
+  font-size: 30px;
+  cursor: pointer;
+  margin: auto;
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+  text-align: center;
+  display: block;
+  visibility: hidden;
+}
+
+#quotes:hover #plus-quote {
+  visibility: visible;
+}
+
+#quotes-display-container {
+  color: white;
+  text-shadow: 0 2px 5px #191919;
+  text-align: center;
+  font-size: 18px;
+}
+
+#add-quote-modal::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(25, 25, 25, 0.9);
+}
+
+#add-quote-modal {
+  display: none;
+}
+
+#add-quote-modal.active {
+  display: block;
+}
+
+#add-quote-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 550px;
+  height: auto;
+  background-color: white;
+  box-shadow: 0 0 5px #fafafa;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+}
+
+#add-quote-container > textarea {
+  width: 95%;
+  height: 130px;
+  resize: none;
+  margin: auto;
+  outline: none;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 10px;
+}
+
+#add-quote-container > ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+}
+
+ul #added-notification {
+  position: absolute;
+  padding-top: 5px;
+  color: #82d308;
+  font-weight: bold;
+  display: none;
+  transition: all 0.5s ease;
+}
+
+#added-notification.active-notification {
+  display: block;
+  animation: scale 0.5s;
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.button-quote {
+  display: inline;
+  width: 60px;
+  height: 25px;
+  border: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button-quote:active {
+  font-weight: bold;
+}
+
+#add-quote-container h2::before {
+  content: 'No need to put quotation marks ( " " )';
+  position: absolute;
+  font-size: 10px;
+  color: gray;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 70px;
+}
+
+#close-button {
+  content: "+";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  color: gray;
+  font-size: 25px;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+
+#close-button:hover {
+  color: black;
+}
+
+#quotes-list {
+  height: 300px;
+  overflow: scroll;
+}
+
+#quotes-list > div {
+  text-align: left;
+  padding: 10px 10px;
+  border-top: 1px solid lightgray;
+  position: relative;
+}
+
+#quotes-list > div:hover {
+  background-color: lightgray;
+}
+
+#quotes-list > div:hover .remove {
+  display: block;
+}
+
+#quotes-list > div:hover .edit-quote {
+  display: block;
+}
+
+.remove {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  font-size: 20px;
+  color: red;
+  display: none;
+  cursor: pointer;
+}
+
+.remove:hover {
+  font-weight: bold;
+}
+
+.edit-quote {
+  color: gray;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 15px;
+  display: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.edit-quote:hover {
+  font-weight: bold;
+}
+
+.row-footer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  grid-area: grid-row-footer;
+}
+
+#todo-container {
+  width: 500px;
+  max-height: 80vh;
+  background-color: rgba(250, 250, 250, 0.5);
+  box-shadow: 0 2px 5px 2px rgba(25, 25, 25, 0.5);
+  position: absolute;
+  bottom: min(8vh, 100px);
+  right: min(5vw, 20px);
+  border-radius: 5px;
+  padding: 0px 15px 30px 15px;
+  display: none;
+}
+
+#todo-container.active-container {
+  display: block;
+}
+
+#todo-container h2 {
+  text-align: center;
+}
+
+#close-todo {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#close-todo:hover {
+  color: white;
+}
+
+#newtodo {
+  width: 80%;
+  min-height: 35px;
+  outline: none;
+  border: none;
+  margin-left: 5%;
+  font-size: 18px;
+  box-shadow: 0 0 2px rgba(25, 25, 25, 0.8);
+}
+
+#plus-button {
+  height: 35px;
+  width: 35px;
+  outline: none;
+  font-size: 25px;
+  border: 1px solid gray;
+  padding-top: 0;
+  position: absolute;
+  right: 8%;
+  cursor: pointer;
+}
+
+#plus-button:hover {
+  border: 1px solid green;
+  color: green;
+  font-weight: bold;
+}
+
+#todo-list {
+  width: 90%;
+  height: auto;
+  max-height: 500px;
+  margin: auto;
+  margin-top: 30px;
+  border-top: 2px solid gray;
+  padding-top: 20px;
+  overflow: scroll;
+}
+
+#todo-list > div {
+  padding: 10px;
+  min-height: 30px;
+  background-color: rgba(25, 25, 25, 0.2);
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 0 0 2px rgba(25, 25, 25, 0.8);
+  position: relative;
+  font-size: 18px;
+  overflow-wrap: break-word;
+}
+
+.remove-todo {
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  font-size: 25px;
+  cursor: pointer;
+  display: none;
+}
+
+#todo-list > div:hover > .remove-todo {
+  display: block;
+}
+
+.remove-todo:hover {
+  color: red;
+}
+
+.completed {
+  color: gray;
+  text-decoration: line-through;
+}
+
+#todo-button {
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  height: 30px;
+  width: 150px;
+  text-align: center;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px 2px rgba(25, 25, 25, 0.5);
+  cursor: pointer;
+  z-index: 2;
+}
+
+#todo-button:hover {
+  font-weight: bold;
+}
+
+#todo-button:active {
+  color: green;
+}
+
+#reset-button {
+  position: absolute;
+  left: 30px;
+  bottom: 20px;
+  height: 30px;
+  width: 150px;
+  text-align: center;
+  font-size: 20px;
+  border-style: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(250, 250, 250, 0.5);
+  cursor: pointer;
+  background-color: rgba(25, 25, 25, 0.5);
+  color: darkgray;
+}
+
+#reset-button:hover, #reset-confirmation ul button:hover {
+  font-weight: bold;
+  background-color: rgba(250, 250, 250, 0.5);
+  color: black;
+}
+
+#reset-button:active {
+  color: green;
+}
+
+#reset-confirmation {
+  position: absolute;
+  left: 30px;
+  bottom: 60px;
+  height: auto;
+  width: 300px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgba(25, 25, 25, 0.5);
+  box-shadow: 0 0 5px rgba(250, 250, 250, 0.5);
+  color: white;
+  padding: 15px;
+  display: none;
+}
+
+#reset-confirmation ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-around;
+  padding: 0;
+}
+
+#reset-confirmation ul button {
+  height: auto;
+  width: 50px;
+  text-align: center;
+  font-size: 20px;
+  border-style: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(250, 250, 250, 0.5);
+  cursor: pointer;
+  background-color: rgba(25, 25, 25, 0.5);
+  color: white;
+  padding: 5px 10px;
+}
+
+#reset-confirmation.active-reset-confirmation {
+  display: block;
+}
+
+/*# sourceMappingURL=style.css.map */
