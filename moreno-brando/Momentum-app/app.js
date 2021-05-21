@@ -269,7 +269,7 @@ function showQuote(quoteContent) {
         addedNotification.classList.remove('active-notification');
     }, 2000)
 
-    //add event listener for each quote
+    //add event listener for each quote - REMOVE FUNCTION
     removeQuote.addEventListener('click', function() {
         this.parentElement.classList.add('deleted-quote-div');
         var deletedQuote  = document.querySelector(".deleted-quote-div .quote-item"); //find the child textContent/quote of the "deleted-quote-div" parent.
@@ -279,6 +279,38 @@ function showQuote(quoteContent) {
         saveQuotes();
         this.parentElement.remove();
        
+    })
+
+    //add event listener for each quote - EDIT FUNCTION
+    editQuote.addEventListener('click', function() {
+        //remove "edited class" for non-active(other than clicked) edit button
+        var editedClassAll = document.querySelectorAll('.edited');
+        editedClassAll.forEach(function(element) {
+            element.classList.remove('edited');
+        })
+
+        // add "edited class to current on click element"
+        var textSpan = this.previousElementSibling;
+        textSpan.classList.add('edited');
+        inputQuote.value = textSpan.textContent;
+        addButton.disabled = true;
+
+        //index of the from the stored quotes
+        let i = quotes.indexOf(textSpan.textContent);
+        
+        function editQuote(e) {
+            if(e.key === "Enter" && textSpan.classList.contains('edited')) {
+                quotes[i] =  inputQuote.value.trim(); //reassign value
+                saveQuotes();
+                textSpan.textContent = inputQuote.value;
+                textSpan.classList.remove('edited');
+                inputQuote.value = "";
+                addButton.disabled = false;
+
+            }
+        }
+
+        inputQuote.addEventListener("keyup", editQuote)
     })
 
 

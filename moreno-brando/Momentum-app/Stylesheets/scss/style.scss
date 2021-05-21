@@ -206,12 +206,12 @@ $input-height: 40px;
 }
 
 .row-2 > #main-focus-container{
-    min-width: 700px;
-    max-width: 95%;
+    width: 700px;
+    max-width: 95vw;
     height: 200px;
     text-align: center;
     position: relative;
-    padding-left: 20px;
+    margin:auto;
 }
 
 #main-focus-container > label {
@@ -222,12 +222,13 @@ $input-height: 40px;
 
 #main-focus-container > #button-main-focus {
     @include input-button();
+    margin-top: -5px;
     display: none;
 }
 
 
 #button-main-focus:hover {
-    font-weight: bold;
+    font-weight: bold;  
 }
 
 
@@ -298,6 +299,7 @@ $input-height: 40px;
     text-shadow: $text-shadow;
     text-align: center;
     font-size: 18px;
+    max-width: 95%;
 }
 
 
@@ -561,7 +563,7 @@ ul #added-notification {
     margin-top: 30px;
     border-top: 2px solid gray;
     padding-top: 20px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 #todo-list > div {
@@ -689,4 +691,77 @@ ul #added-notification {
 
 #reset-confirmation.active-reset-confirmation  {
     display: block;
+}
+
+
+@media only screen and (max-width: 500px) {
+    
+    #time {
+        font-size: min(6vh, 20vw);
+    }
+
+    #greetings {
+        font-size: min(6vh, 20vw);
+    }
+
+    #main-focus-container {
+        margin: auto;
+    }
+
+    #todo-button {
+        right: 5px;
+        bottom: 5px;
+        width: 100px;
+        font-size: 16px;
+    }
+
+    #todo-container {
+        width: 95%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #reset-button {
+        left: 5px;
+        bottom: 5px;
+        width: 100px;
+        font-size: 16px;
+    }
+
+    #reset-confirmation{
+        font-size: 16px;
+        width: 350px;
+        max-width: 95%;
+        margin: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #reset-confirmation ul button {
+        font-size: 16px;
+    }
+
+    .row-3 {
+        grid-area: grid-row-header;
+        display: flex;
+        align-content: flex-start;
+        justify-content: center;
+    }
+
+    #quotes {
+        position: relative;
+    }
+    #quotes-display-container {
+        font-size: 14px;
+        margin: auto;
+    }
+
+    #plus-quote {
+        position: absolute;
+        font-size: 18px;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        
+    }
 }
