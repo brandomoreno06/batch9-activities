@@ -30,8 +30,27 @@
         </div>
 
         <div id="game-board" class="hide"></div>
-        <div id="result"></div>
+        <div id="result">
+            <h1>Game Over !</h1>
+            <div id="result-message-winner" class="result-message">
+                <h1>The WINNER is :</h1>
+                <canvas id="winner"></canvas>
+                <ul id="previous-next">
+                    <li id="previous" class="button">Previous</li>
+                    <li id="next" class="button">Next</li>
+                </ul>
+                
+            </div>
+            <div id="result-message-tie" class="result-message">
+                <h1>No Winner !</h1>
+                <h1>It's a TIE !</h1>
+            </div>
+            <span id="restart-button">Restart</span>
+        </div>
     </div>
+
+
+
 
     <script type="module" src="./script/setup.mjs"></script>
     <script type="module" src="./script/game.mjs"></script>

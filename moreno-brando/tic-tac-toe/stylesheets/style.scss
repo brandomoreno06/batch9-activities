@@ -54,6 +54,7 @@ $border-radius: 5px;
     @include board();
     border-radius: $border-radius;
     text-align: center;
+    // display: none; //TO REMOVE ................................TO REMOVE
 }
 
 #play-setup-container {
@@ -220,4 +221,125 @@ $player-field-position: -200px;
     width: 200px;
     height: 200px;
     border: 1px solid rgba(250, 250, 250, 0.4);;
+}
+
+
+//GAMEOVER RESULT 
+
+#result {
+    @include board();
+    @include boxStyle();
+    text-align: center;
+    padding-top: 20px;
+    display: none;
+}
+
+#result > h1 {
+    font-size: 50px;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+
+.result-message {
+    width: 80%;
+    height: 50%;
+    margin: 5% auto;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 1px rgba(250, 250, 250, 0.5);
+    border-radius: 10px;
+}
+
+
+#result-message-winner {
+    display: none;
+}
+
+#result-message-tie {
+    display: none;
+}
+
+#restart-button {
+    @include buttons();
+    width: 30%;
+    height: 45px;
+    font-size: 30px;
+    display: grid;
+    place-content: center;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#restart-button:hover {
+    @include buttons-hover();
+}
+
+#previous-next {
+    width: 80%;
+    list-style: none;
+    display: flex;
+    padding: 0;
+    justify-content: space-around;
+}
+
+#previous, #next {
+    @include buttons();
+    font-size: 30px;
+    width: 38%;
+    height: 45px;
+    display: grid;
+    place-content: center;
+    position: absolute;
+    bottom: 100px;
+}
+
+#previous {
+    left: 60px;
+}
+
+#next {
+    right: 60px;
+}
+
+.button:hover{
+    @include buttons-hover();
+}
+
+.active-container {
+    display: block !important;
+}
+
+.active-result {
+    display: flex !important;
+}
+
+#winner {
+    font-size: 60px;
+    animation: animation 0.5s linear;
+}
+
+@keyframes animation {
+    0% {
+        transform: scale(10);
+    }
+    25% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    75% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+
+
 }

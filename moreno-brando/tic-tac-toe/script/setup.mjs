@@ -13,7 +13,7 @@ var player2Side = document.getElementById('player2')
 var selectInstruction = document.getElementById('instruction-select');
 
 //DECLARE A "PLAYER" OBJECT
-export let player = {};
+let player = {};
 
 
 //PLAYER 1 TO SELECT SYMBOL
@@ -71,8 +71,10 @@ function showBoard() {
 
     startPLaying();
     }
-
 }
 
 playButton.onclick = showBoard;
+
+export { player, playSetupContainer, xButton, oButton }
+
 

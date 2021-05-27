@@ -10,47 +10,62 @@ var gameBoardUI = document.getElementById('game-board');
 var cell = document.getElementsByClassName('cell');
 
 
-
 //CREATE DOM ELEMENTS WITH DATA ATTRIBUTE AS INDEX [i] and [j]OF "gameBoard"
-for(const row of gameBoard) {
-    for(let i = 0; i < row.length; i++) {
-        let dataIndex = i;
-        gameBoardUI.innerHTML += `<canvas data-row="${gameBoard.indexOf(row)}" data-index="${dataIndex}" class="cell"></canvas>`;
-    }      
+function createGameBoard() {
+    for(const row of gameBoard) {
+        for(let i = 0; i < row.length; i++) {
+            let dataIndex = i;
+            gameBoardUI.innerHTML += `<canvas data-row="${gameBoard.indexOf(row)}" data-index="${dataIndex}" class="cell"></canvas>`;
+        } 
+    }     
 }
 
+createGameBoard();
 
 
 //START PLAYING FUNCTION. PLAYER1 STARTS.
-import { player } from "./setup.mjs"
+import { player, playSetupContainer, xButton, oButton } from "./setup.mjs"
 export default startPlaying;
 
+let winner = false;
+let tie = false;
+let currentPlayer;
+
+
+//CALLED ON "showBoard" function
 function startPlaying() {
-
     gameBoardUI.addEventListener('click', currentPLayerMove);
-
-    let currentPlayer = player.currentSymbol;
-
-    //find the data attributes' value.(This will be assigned as index of gameBoard cells)
-    function currentPLayerMove(e) {
-        let i = e.target.attributes[0].value;  //date-row attribute
-        let j = e.target.attributes[1].value; //date-index attribute
-
-        if(gameBoard[i][j] === "x" || gameBoard[i][j] === "o") {
-            return; //return if cell is filled
-        }
-
-        else {
-            gameBoard[i][j] = currentPlayer;
-            drawImage(e, currentPlayer);
-            checkWinnerOrTie(currentPlayer);
-         
-            //change current player to opponent (vice versa)
-            currentPlayer = currentPlayer == player.currentSymbol ? player.opponentSymbol : player.currentSymbol; 
-            
-        }   
-    }
+    currentPlayer = player.currentSymbol;
 }
+
+
+
+//GET THE DATA ATTRIBUTES' VALUE (This will be assigned as index of gameBoard cells)
+function currentPLayerMove(e) {
+    let i = e.target.getAttribute('data-row');  //date-row attribute
+    let j = e.target.getAttribute('data-index'); //date-index attribute
+
+    if(gameBoard[i][j] === "x" || gameBoard[i][j] === "o") {
+        return; //return if cell is filled
+    }
+
+    if(winner) {
+        return;
+    }
+
+    else {
+        gameBoard[i][j] = currentPlayer;
+        drawImage(e);
+        checkWinner();
+        isTie();
+        setTimeout(showGameResult, 1000);
+        // showGameResult();
+        
+        //change current player to opponent (vice versa)
+        currentPlayer = currentPlayer == player.currentSymbol ? player.opponentSymbol : player.currentSymbol;     
+    }   
+}
+
 
 
 
@@ -65,7 +80,7 @@ let cellSize = 200;
 let drawImageOriginY = 25;
 let drawImageOriginX = 50;
 
-function drawImage(e, currentPlayer) {
+function drawImage(e) {
     let canvas = e.target.getContext("2d");
     let img = currentPlayer === "x" ? xImage : oImage;
     canvas.drawImage(img, drawImageOriginX, drawImageOriginY, cellSize, 100);
@@ -76,9 +91,7 @@ function drawImage(e, currentPlayer) {
 
 //CHECK IF CURRENT PLAYER IS WINNING 
 
-function checkWinnerOrTie(currentSymbol) {
-    let winningCombination = false;
-
+function checkWinner() {
     let x = [...gameBoard]; //to shorthand typing of "gameboard"
 
     let combo1 = [x[0][0], x[0][1], x[0][2]] //Horizontal
@@ -98,7 +111,7 @@ function checkWinnerOrTie(currentSymbol) {
 
     for (let combo of combos) {
         let filterResult = combo.filter((element) => {
-            return element == currentSymbol;
+            return element == currentPlayer;
         })
         
         filteredCombos.push(filterResult);
@@ -107,21 +120,18 @@ function checkWinnerOrTie(currentSymbol) {
     //check if any  of filteredCombos element has a length of 3 of the same symbol
     for (const filteredCombo of filteredCombos) {
         if(filteredCombo.length == 3) {
-            console.log("There's a winner!")
-            console.log(filteredCombos);
-            console.log(filteredCombos.indexOf(filteredCombo))
-            winningCombination = true;
+            // console.log(filteredCombos);
+            // console.log(filteredCombos.indexOf(filteredCombo))
+            winner = true;
         }
     }
-
-    isTie(winningCombination);
-
 }
 
 
 
 //CHECK IF TIE - ALL ELEMENTS OF GAMEBOARD ARE FILLED AND THERE IS NO WINNER
-function isTie(winningCombination) {
+function isTie() {
+
     let stringSymbol = "";
     
     //create a string of filled elements of gameBoard
@@ -132,8 +142,49 @@ function isTie(winningCombination) {
         }
     }
     
-    if (stringSymbol.length == 9 && winningCombination == false) {
+    if (stringSymbol.length == 9 && !winner) {
         console.log("It's a tie!")
+        tie = true;
     }
 }
 
+
+function showGameResult() {
+        
+    var resultContainer = document.getElementById('result');
+    var resultWinner = document.getElementById('result-message-winner');
+    var resultTie = document.getElementById('result-message-tie');
+    var resultWinnerSymbol = document.getElementById('winner').getContext("2d");
+
+
+    if (winner) {
+        gameBoardUI.classList.add('hide');
+        resultContainer.classList.add('active-container');
+        resultWinner.classList.add('active-result');
+
+        let img = currentPlayer === "x" ? oImage : xImage;
+        resultWinnerSymbol.drawImage(img, 80, 0, 150, 150)     
+    }
+
+    if (tie) {
+        gameBoardUI.classList.add('hide')
+        resultContainer.classList.add('active-container');
+        resultTie.classList.add('active-result');
+        ;
+    }
+
+    //RESTART GAME
+    var restartButton = document.getElementById('restart-button');
+    
+    function restartGame() {
+        resultContainer.classList.remove('active-container');
+        resultWinner.classList.remove('active-result');
+        resultTie.classList.remove('active-result');
+        playSetupContainer.classList.remove('hide');
+        xButton.classList.remove('selected');
+        oButton.classList.remove('selected');
+        location.reload()
+    }
+
+    restartButton.onclick = restartGame;
+}
