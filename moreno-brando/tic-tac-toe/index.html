@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="setup">
+            <div id="play-setup-container">
+                <h1>TIC TAC TOE</h1>
+                <h2 id="instruction-select">SELECT YOUR SYMBOL</h2>
+                <ul id="symbols">
+                    <li id="x-button">X</li>
+                    <li id="o-button">O</li>
+                </ul>
+                <span id="play-button">PLAY</span>
+            </div>
+            <div id="player1" class="player-side">
+                <h1 contenteditable>Player-1</h1>
+                <span id="symbol-1" class="symbol"></span>
+            </div>
+            <div id="player2" class="player-side">
+                <h1 contenteditable>Player-2</h1>
+                <span id="symbol-2" class="symbol"></span>
+            </div>
+        </div>
+
+        <div id="game-board" class="hide"></div>
+        <div id="result"></div>
+    </div>
+
+    <script type="module" src="./script/setup.mjs"></script>
+    <script type="module" src="./script/game.mjs"></script>
+    
+</body>
+</html>

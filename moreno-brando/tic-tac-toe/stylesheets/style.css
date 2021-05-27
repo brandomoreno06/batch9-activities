@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Black Ops One", cursive;
+}
+
+#container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+}
+
+#container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets//background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+  filter: blur(5px);
+  z-index: -1;
+}
+
+#setup {
+  width: 600px;
+  height: 600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  text-align: center;
+}
+
+#play-setup-container {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(25, 25, 25, 0.75);
+  box-shadow: 0 0 16px 5px rgba(250, 250, 250, 0.5);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+#play-setup-container > h1 {
+  font-size: 50px;
+}
+
+#instruction-select {
+  width: 50%;
+  margin: auto;
+}
+
+.player-side {
+  background-color: rgba(25, 25, 25, 0.75);
+  box-shadow: 0 0 16px 5px rgba(250, 250, 250, 0.5);
+  border-radius: 5px;
+  box-shadow: 0 0 2px rgba(250, 250, 250, 0.5);
+  position: absolute;
+  width: 100px;
+  height: 600px;
+  bottom: 0;
+  padding-top: 50px;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#player1 {
+  left: 0;
+}
+
+#player2 {
+  right: 0;
+}
+
+.active-game-player1 {
+  left: -200px !important;
+  transition: all 0.8s ease;
+}
+
+.active-game-player2 {
+  right: -200px !important;
+  transition: all 0.8s ease;
+}
+
+#symbol-1, #symbol-2 {
+  font-size: 60px;
+  position: absolute;
+  bottom: 40px;
+}
+
+#symbols {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: space-around;
+  width: 50%;
+  margin: auto;
+}
+
+#symbols > li {
+  padding: 25px 30px;
+  font-size: 40px;
+  box-shadow: 0 0 5px 2px rgba(250, 250, 250, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#symbols > li:hover {
+  background-color: rgba(250, 250, 250, 0.5);
+  color: black;
+}
+
+.selected {
+  transform: scale(1.2);
+  background-color: rgba(250, 250, 250, 0.5);
+  color: black;
+}
+
+#play-button {
+  font-size: 40px;
+  box-shadow: 0 0 5px 2px rgba(250, 250, 250, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 40%;
+  height: 45px;
+  margin: auto;
+  display: grid;
+  place-content: center;
+}
+
+#play-button:hover {
+  background-color: rgba(250, 250, 250, 0.5);
+  color: black;
+}
+
+.none-selected {
+  background-color: rgba(250, 25, 25, 0.4);
+}
+
+#game-board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 600px;
+  height: 600px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  animation: opacity 0.8s ease;
+  border: 1px solid rgba(250, 250, 250, 0.4);
+  box-sizing: content-box;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.hide {
+  display: none !important;
+}
+
+.cell {
+  background-color: rgba(25, 25, 25, 0.95);
+  width: 200px;
+  height: 200px;
+  border: 1px solid rgba(250, 250, 250, 0.4);
+}
+
+/*# sourceMappingURL=style.css.map */
