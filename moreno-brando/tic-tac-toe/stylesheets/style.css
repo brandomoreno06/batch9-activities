@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap");
+:root {
+  --cell-size: 200px;
+  --board-size: calc((var(--cell-size)) * 3);
+  --grid-template: repeat(3, 1fr);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -29,8 +35,8 @@ body {
 }
 
 #setup {
-  width: 600px;
-  height: 600px;
+  width: var(--board-size);
+  height: var(--board-size);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -87,12 +93,17 @@ body {
 
 .active-game-player1 {
   left: -200px !important;
-  transition: all 0.8s ease;
+  transition: all 0.5s ease;
 }
 
 .active-game-player2 {
   right: -200px !important;
-  transition: all 0.8s ease;
+  transition: all 0.5s ease;
+}
+
+.player-turn {
+  box-shadow: 0 0 10px rgba(25, 200, 25, 0.5) !important;
+  border-top: 15px solid rgba(25, 200, 25, 0.5);
 }
 
 #symbol-1, #symbol-2 {
@@ -129,6 +140,14 @@ body {
   color: black;
 }
 
+.selected-x {
+  color: rgba(250, 25, 25, 0.8);
+}
+
+.selected-o {
+  color: rgba(25, 250, 25, 0.8);
+}
+
 #play-button {
   font-size: 40px;
   box-shadow: 0 0 5px 2px rgba(250, 250, 250, 0.5);
@@ -151,10 +170,8 @@ body {
 }
 
 #game-board {
-  display: flex;
-  flex-wrap: wrap;
-  width: 600px;
-  height: 600px;
+  width: var(--board-size);
+  height: var(--board-size);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -163,6 +180,10 @@ body {
   animation: opacity 0.8s ease;
   border: 1px solid rgba(250, 250, 250, 0.4);
   box-sizing: content-box;
+  display: grid;
+  grid-template-columns: var(--grid-template);
+  grid-template-rows: var(--grid-template);
+  grid-auto-flow: row;
 }
 
 @keyframes opacity {
@@ -179,14 +200,19 @@ body {
 
 .cell {
   background-color: rgba(25, 25, 25, 0.95);
-  width: 200px;
-  height: 200px;
+  width: var(--cell-size);
+  height: var(--cell-size);
   border: 1px solid rgba(250, 250, 250, 0.4);
+  cursor: pointer;
+}
+
+.cell.marked {
+  cursor: default;
 }
 
 #result {
-  width: 600px;
-  height: 600px;
+  width: var(--board-size);
+  height: var(--board-size);
   position: absolute;
   left: 50%;
   top: 50%;
@@ -197,6 +223,7 @@ body {
   text-align: center;
   padding-top: 20px;
   display: none;
+  border-top: 10px solid rgba(250, 25, 25, 0.4);
 }
 
 #result > h1 {
@@ -238,8 +265,7 @@ body {
   place-content: center;
   position: absolute;
   bottom: 20px;
-  left: 50%;
-  transform: translate(-50%);
+  left: 10%;
 }
 
 #restart-button:hover {
@@ -247,12 +273,32 @@ body {
   color: black;
 }
 
+#show-game-history {
+  font-size: 40px;
+  box-shadow: 0 0 5px 2px rgba(250, 250, 250, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+  width: 30%;
+  height: 45px;
+  font-size: 30px;
+  display: grid;
+  place-content: center;
+  position: absolute;
+  bottom: 20px;
+  right: 10%;
+}
+
+#show-game-history:hover {
+  background-color: rgba(250, 250, 250, 0.5);
+  color: black;
+}
+
 #previous-next {
-  width: 80%;
+  width: 90%;
   list-style: none;
   display: flex;
   padding: 0;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #previous, #next {
@@ -263,10 +309,27 @@ body {
   font-size: 30px;
   width: 38%;
   height: 45px;
-  display: grid;
   place-content: center;
   position: absolute;
-  bottom: 100px;
+  bottom: -60px;
+  display: none;
+}
+
+.active-previous-next {
+  display: grid !important;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+  color: gray;
+}
+
+.disabled:hover {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+  background-color: inherit !important;
+  color: gray !important;
 }
 
 #previous {

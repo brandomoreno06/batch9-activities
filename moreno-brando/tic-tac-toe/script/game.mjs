@@ -1,30 +1,34 @@
-//CREATE A ARRAY
+//CREATE GAMEBOARD ARRAY
+const rows = 3;
+const cols = 3
+let gameBoard = new Array(rows);
 
-let row1 = new Array(3);
-let row2 = new Array(3);
-let row3 = new Array(3);
-let gameBoard = [row1, row2, row3];
-let gameBoardHistory = [];
+function createGameBoardArray () {
+    for (let i = 0; i < cols; i++) {
+        gameBoard[i] = new Array(cols);
+    }
+}
+createGameBoardArray();
 
-var gameBoardUI = document.getElementById('game-board');
-var cell = document.getElementsByClassName('cell');
 
 
 //CREATE DOM ELEMENTS WITH DATA ATTRIBUTE AS INDEX [i] and [j]OF "gameBoard"
-function createGameBoard() {
+var gameBoardUI = document.getElementById('game-board');
+var cell = document.getElementsByClassName('cell');
+
+function createGameBoardDOM() {
     for(const row of gameBoard) {
         for(let i = 0; i < row.length; i++) {
-            let dataIndex = i;
-            gameBoardUI.innerHTML += `<canvas data-row="${gameBoard.indexOf(row)}" data-index="${dataIndex}" class="cell"></canvas>`;
+            gameBoardUI.innerHTML += `<canvas data-row="${gameBoard.indexOf(row)}" data-index="${i}" class="cell"></canvas>`;
         } 
     }     
 }
+createGameBoardDOM();
 
-createGameBoard();
 
 
 //START PLAYING FUNCTION. PLAYER1 STARTS.
-import { player, playSetupContainer, xButton, oButton } from "./setup.mjs"
+import { player, playSetupContainer, xButton, oButton, player1Side, player2Side, player1Symbol, player2Symbol } from "./setup.mjs"
 export default startPlaying;
 
 let winner = false;
@@ -54,36 +58,38 @@ function currentPLayerMove(e) {
     }
 
     else {
+        e.target.classList.add('marked');
         gameBoard[i][j] = currentPlayer;
         drawImage(e);
         checkWinner();
         isTie();
-        setTimeout(showGameResult, 1000);
-        // showGameResult();
+        showPlayerTurn(e);
+        setTimeout(showGameResult, 500);
+        saveHistory();
         
         //change current player to opponent (vice versa)
-        currentPlayer = currentPlayer == player.currentSymbol ? player.opponentSymbol : player.currentSymbol;     
-    }   
+        currentPlayer = currentPlayer == player.currentSymbol ? player.opponentSymbol : player.currentSymbol; 
+    }
 }
 
 
 
 
 //DRAW X or O on BOARD
+let cellSize = 200;
+let drawImageOriginY = 25;
+let drawImageOriginX = 50;
+
 const xImage = new Image ();
 xImage.src = 'assets/x-png.png';
 
 const oImage = new Image ();
 oImage.src = 'assets/o-png.png';
 
-let cellSize = 200;
-let drawImageOriginY = 25;
-let drawImageOriginX = 50;
-
 function drawImage(e) {
     let canvas = e.target.getContext("2d");
     let img = currentPlayer === "x" ? xImage : oImage;
-    canvas.drawImage(img, drawImageOriginX, drawImageOriginY, cellSize, 100);
+    canvas.drawImage(img, drawImageOriginX, drawImageOriginY, cellSize, cellSize / 2);
 }
 
 
@@ -119,7 +125,7 @@ function checkWinner() {
 
     //check if any  of filteredCombos element has a length of 3 of the same symbol
     for (const filteredCombo of filteredCombos) {
-        if(filteredCombo.length == 3) {
+        if(filteredCombo.length == rows) {
             // console.log(filteredCombos);
             // console.log(filteredCombos.indexOf(filteredCombo))
             winner = true;
@@ -136,13 +142,14 @@ function isTie() {
     
     //create a string of filled elements of gameBoard
     for (let i = 0; i < gameBoard.length; i++) {
-        for (let j = 0; j < 3; j++) {
+        for (let j = 0; j < cols; j++) {
             stringSymbol += `${gameBoard[i][j]}`;
             stringSymbol = stringSymbol.replace(/undefined/g, "")    
         }
     }
     
-    if (stringSymbol.length == 9 && !winner) {
+    //check if string length is equal to number of cells
+    if (stringSymbol.length == rows ** 2 && !winner) {
         console.log("It's a tie!")
         tie = true;
     }
@@ -163,28 +170,62 @@ function showGameResult() {
         resultWinner.classList.add('active-result');
 
         let img = currentPlayer === "x" ? oImage : xImage;
-        resultWinnerSymbol.drawImage(img, 80, 0, 150, 150)     
+        resultWinnerSymbol.drawImage(img, 80, 0, 150, 150);
+        
+        //REMOVE PLAYER TURN CLASSLIST
+        player1Side.classList.remove('player-turn');
+        player2Side.classList.remove('player-turn');
     }
 
     if (tie) {
         gameBoardUI.classList.add('hide')
         resultContainer.classList.add('active-container');
         resultTie.classList.add('active-result');
-        ;
+        
+        //REMOVE PLAYER TURN CLASSLIST
+        player1Side.classList.remove('player-turn');
+        player2Side.classList.remove('player-turn');
     }
 
     //RESTART GAME
     var restartButton = document.getElementById('restart-button');
     
     function restartGame() {
+        winner = false;
+        tie = false;
+        resultWinnerSymbol.clearRect(80, 0, 150, 150)
         resultContainer.classList.remove('active-container');
         resultWinner.classList.remove('active-result');
         resultTie.classList.remove('active-result');
         playSetupContainer.classList.remove('hide');
         xButton.classList.remove('selected');
         oButton.classList.remove('selected');
-        location.reload()
+        player1Symbol.textContent = "" ;
+        player2Symbol.textContent = "" ;
+        gameBoardUI.innerHTML = "";
+        gameBoard = new Array(rows);
+        createGameBoardArray();
+        createGameBoardDOM();
+        startPlaying();
+        console.log(gameBoard);
+        // location.reload();
     }
 
     restartButton.onclick = restartGame;
+
+}
+
+//Highlight whose turn is it
+function showPlayerTurn() {
+    player1Side.classList.toggle('player-turn');
+    player2Side.classList.toggle('player-turn');
+}
+
+
+//SAVE HISTORY - CREATE A STORAGE FOR CURRENT "gameBoard" ARRAY;
+export let gameBoardHistory = [];
+
+function saveHistory() {
+    let copyOfGameBoard = JSON.parse(JSON.stringify(gameBoard)); // DEEP CLONE gameBoard;
+    gameBoardHistory.push(copyOfGameBoard);
 }
