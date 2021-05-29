@@ -256,14 +256,19 @@ $player-field-position: -200px;
 
 #result {
     @include board();
+    display: none;
+}
+
+
+#game-over-display {
+    @include board();
     @include boxStyle();
     text-align: center;
     padding-top: 20px;
-    display: none;
     border-top: 10px solid rgba(250, 25, 25, 0.4);
 }
 
-#result > h1 {
+#game-over-display > h1 {
     font-size: 50px;
     text-transform: uppercase;
     text-decoration: underline;
@@ -304,8 +309,18 @@ $player-field-position: -200px;
     left: 10%;
 }
 
+
 #restart-button:hover {
     @include buttons-hover();
+}
+
+#restart-button.active-history {
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 35px;
+    z-index: 2;
 }
 
 #show-game-history {

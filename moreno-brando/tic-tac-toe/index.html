@@ -31,16 +31,18 @@
 
         <div id="game-board" class="hide"></div>
         <div id="result">
-            <h1>Game Over !</h1>
-            <div id="result-message-winner" class="result-message">
-                <h1>The WINNER is :</h1>
-                <canvas id="winner"></canvas>         
+            <div id="game-over-display">
+                <h1>Game Over !</h1>
+                <div id="result-message-winner" class="result-message">
+                    <h1>The WINNER is :</h1>
+                    <canvas id="winner"></canvas>         
+                </div>
+                <div id="result-message-tie" class="result-message">
+                    <h1>No Winner !</h1>
+                    <h1>It's a TIE !</h1>
+                </div>
+                <span id="show-game-history">History</span>
             </div>
-            <div id="result-message-tie" class="result-message">
-                <h1>No Winner !</h1>
-                <h1>It's a TIE !</h1>
-            </div>
-            <span id="show-game-history">History</span>
             <ul id="previous-next">
                 <li id="previous" class="button">Previous</li>
                 <li id="next" class="button">Next</li>

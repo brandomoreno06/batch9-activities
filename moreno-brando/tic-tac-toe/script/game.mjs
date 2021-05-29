@@ -1,7 +1,7 @@
 //CREATE GAMEBOARD ARRAY
 const rows = 3;
 const cols = 3
-let gameBoard = new Array(rows);
+export let gameBoard = new Array(rows);
 
 function createGameBoardArray () {
     for (let i = 0; i < cols; i++) {
@@ -13,7 +13,7 @@ createGameBoardArray();
 
 
 //CREATE DOM ELEMENTS WITH DATA ATTRIBUTE AS INDEX [i] and [j]OF "gameBoard"
-var gameBoardUI = document.getElementById('game-board');
+export var gameBoardUI = document.getElementById('game-board');
 var cell = document.getElementsByClassName('cell');
 
 function createGameBoardDOM() {
@@ -29,6 +29,7 @@ createGameBoardDOM();
 
 //START PLAYING FUNCTION. PLAYER1 STARTS.
 import { player, playSetupContainer, xButton, oButton, player1Side, player2Side, player1Symbol, player2Symbol } from "./setup.mjs"
+import { saveHistory } from "./gameHistory.mjs"
 export default startPlaying;
 
 let winner = false;
@@ -80,10 +81,10 @@ let cellSize = 200;
 let drawImageOriginY = 25;
 let drawImageOriginX = 50;
 
-const xImage = new Image ();
+export const xImage = new Image ();
 xImage.src = 'assets/x-png.png';
 
-const oImage = new Image ();
+export const oImage = new Image ();
 oImage.src = 'assets/o-png.png';
 
 function drawImage(e) {
@@ -156,6 +157,11 @@ function isTie() {
 }
 
 
+
+//SHOW GAME RESULT UPON WINNING OR TIE
+import { gameOverDisplay, previousButton, nextButton, showGameOver } from "./gameHistory.mjs"
+
+
 function showGameResult() {
         
     var resultContainer = document.getElementById('result');
@@ -163,7 +169,7 @@ function showGameResult() {
     var resultTie = document.getElementById('result-message-tie');
     var resultWinnerSymbol = document.getElementById('winner').getContext("2d");
 
-
+    //when player wins
     if (winner) {
         gameBoardUI.classList.add('hide');
         resultContainer.classList.add('active-container');
@@ -177,6 +183,7 @@ function showGameResult() {
         player2Side.classList.remove('player-turn');
     }
 
+    //when tie
     if (tie) {
         gameBoardUI.classList.add('hide')
         resultContainer.classList.add('active-container');
@@ -187,27 +194,43 @@ function showGameResult() {
         player2Side.classList.remove('player-turn');
     }
 
+
     //RESTART GAME
     var restartButton = document.getElementById('restart-button');
     
     function restartGame() {
         winner = false;
         tie = false;
-        resultWinnerSymbol.clearRect(80, 0, 150, 150)
+
+        //clear drawn image displayed on gameOver
+        resultWinnerSymbol.clearRect(80, 0, 150, 150);
+
+        //hide/modify display of elements in result containers
         resultContainer.classList.remove('active-container');
         resultWinner.classList.remove('active-result');
         resultTie.classList.remove('active-result');
+        previousButton.classList.remove('active-previous-next');
+        nextButton.classList.remove('active-previous-next', 'disabled');
+        restartButton.classList.remove('active-history');
+        restartButton.innerHTML = "Restart";
+        showGameOver.classList.remove('hide');
+
+        //modify display on setup container
         playSetupContainer.classList.remove('hide');
+        gameOverDisplay.classList.remove('hide');
         xButton.classList.remove('selected');
         oButton.classList.remove('selected');
         player1Symbol.textContent = "" ;
         player2Symbol.textContent = "" ;
+
+        //clear gameboard current status, and history array; create gameboard UI;
+        gameBoardUI.classList.add('hide')
         gameBoardUI.innerHTML = "";
         gameBoard = new Array(rows);
         createGameBoardArray();
         createGameBoardDOM();
         startPlaying();
-        console.log(gameBoard);
+
         // location.reload();
     }
 
@@ -219,13 +242,4 @@ function showGameResult() {
 function showPlayerTurn() {
     player1Side.classList.toggle('player-turn');
     player2Side.classList.toggle('player-turn');
-}
-
-
-//SAVE HISTORY - CREATE A STORAGE FOR CURRENT "gameBoard" ARRAY;
-export let gameBoardHistory = [];
-
-function saveHistory() {
-    let copyOfGameBoard = JSON.parse(JSON.stringify(gameBoard)); // DEEP CLONE gameBoard;
-    gameBoardHistory.push(copyOfGameBoard);
 }
