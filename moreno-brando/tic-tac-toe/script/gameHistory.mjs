@@ -1,5 +1,5 @@
 import { gameBoardUI, gameBoard, xImage, oImage } from "./game.mjs"
-export { previousButton, nextButton, gameOverDisplay, showGameOver }
+export { previousButton, nextButton, gameOverDisplay, showGameOver, clearGameBoardHistory, gameBoardHistory, saveHistory }
 
 
 
@@ -8,13 +8,15 @@ export { previousButton, nextButton, gameOverDisplay, showGameOver }
 let gameBoardHistory = [];
 let index; //index of gameBoardHistory - call in showGameBoardHistory function
 
-export const saveHistory =  function () {
+
+//clear gameBoardHistoryHistory on Restart
+const clearGameBoardHistory = function() {
+    gameBoardHistory = [];
+}
+
+
+const saveHistory =  function () {
     let copyOfGameBoard = JSON.parse(JSON.stringify(gameBoard)); // DEEP CLONE gameBoard;
-    // let copyOfGameBoard = [];
-    // for(let i = 0; i < rows; i++) {
-    //     let newRowArray = gameBoard.slice(i, i + 1);
-    //     copyOfGameBoard.push(newRowArray);
-    // }
     gameBoardHistory.push(copyOfGameBoard);
     index = gameBoardHistory.length;
     console.log(gameBoardHistory);
@@ -27,6 +29,8 @@ var previousButton = document.getElementById('previous');
 var nextButton = document.getElementById('next');
 var gameOverDisplay = document.getElementById('game-over-display');
 
+
+//Buttons event listeners
 showGameOver.onclick = showPreviousNextButtons;
 previousButton.onclick = showPreviousMove;
 nextButton.onclick = showNextMove;
@@ -47,11 +51,14 @@ function showPreviousNextButtons() {
 function showPreviousMove() {
     nextButton.classList.remove('disabled');
     gameOverDisplay.classList.add('hide');
+    previousButton.classList.remove('disabled');
 
     if(index === 0) {
+        previousButton.classList.add('disabled');
         return
     }
 
+    //get the previous element in gameBoardHistory
     index --;
     showGameBoardHistory();
     
@@ -60,7 +67,11 @@ function showPreviousMove() {
 
 function showNextMove() {
     if(index === (gameBoardHistory.length - 1)) {
-        return
+        gameOverDisplay.classList.remove('hide');
+        gameBoardUI.classList.add('hide');
+        nextButton.classList.add('disabled');
+        previousButton.classList.remove('disabled');
+        return;
     }
 
     //get the next element in gameBoardHistory
@@ -75,14 +86,16 @@ function showGameBoardHistory() {
     //show gameBoard UI
     gameBoardUI.classList.remove('hide');
     
+
     //clear all drawn image on each cell
     let cell = gameBoardUI.querySelectorAll(".cell");
     cell.forEach(element => {
         element.getContext("2d").clearRect(0, 0, 600, 600);
     });
+    
+    let id = 0; //id of cell (canvas)
 
     //draw image on each cell showing gamaBoard History Data
-    let id = 0;
     for(let i = 0; i < gameBoard.length; i++) {
         for(let j = 0; j < gameBoard.length; j++) {
             let cellSize = 200;
@@ -93,7 +106,7 @@ function showGameBoardHistory() {
                 cell[id].getContext("2d").drawImage(img, 50, 25, cellSize, cellSize / 2);
             }
             
-            id++
+            id++;
         }
     }
 }

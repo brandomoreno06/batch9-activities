@@ -1,7 +1,7 @@
 //CREATE GAMEBOARD ARRAY
 const rows = 3;
 const cols = 3
-export let gameBoard = new Array(rows);
+export let gameBoard = [];
 
 function createGameBoardArray () {
     for (let i = 0; i < cols; i++) {
@@ -14,7 +14,6 @@ createGameBoardArray();
 
 //CREATE DOM ELEMENTS WITH DATA ATTRIBUTE AS INDEX [i] and [j]OF "gameBoard"
 export var gameBoardUI = document.getElementById('game-board');
-var cell = document.getElementsByClassName('cell');
 
 function createGameBoardDOM() {
     for(const row of gameBoard) {
@@ -28,6 +27,7 @@ createGameBoardDOM();
 
 
 //START PLAYING FUNCTION. PLAYER1 STARTS.
+
 import { player, playSetupContainer, xButton, oButton, player1Side, player2Side, player1Symbol, player2Symbol } from "./setup.mjs"
 import { saveHistory } from "./gameHistory.mjs"
 export default startPlaying;
@@ -42,7 +42,6 @@ function startPlaying() {
     gameBoardUI.addEventListener('click', currentPLayerMove);
     currentPlayer = player.currentSymbol;
 }
-
 
 
 //GET THE DATA ATTRIBUTES' VALUE (This will be assigned as index of gameBoard cells)
@@ -159,7 +158,7 @@ function isTie() {
 
 
 //SHOW GAME RESULT UPON WINNING OR TIE
-import { gameOverDisplay, previousButton, nextButton, showGameOver } from "./gameHistory.mjs"
+import { gameOverDisplay, previousButton, nextButton, showGameOver, clearGameBoardHistory } from "./gameHistory.mjs"
 
 
 function showGameResult() {
@@ -224,6 +223,7 @@ function showGameResult() {
         player2Symbol.textContent = "" ;
 
         //clear gameboard current status, and history array; create gameboard UI;
+        clearGameBoardHistory();
         gameBoardUI.classList.add('hide')
         gameBoardUI.innerHTML = "";
         gameBoard = new Array(rows);
