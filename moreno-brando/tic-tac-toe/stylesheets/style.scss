@@ -258,6 +258,10 @@ $player-field-position: -200px;
     cursor: default;
 }
 
+.cell.winner {
+    transform: scale(1.5);
+}
+
 
 
 
@@ -366,6 +370,8 @@ $player-field-position: -200px;
     position: absolute;
     bottom: max(-60px, -10%);
     display: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .active-previous-next {
@@ -407,7 +413,6 @@ $player-field-position: -200px;
 
 #winner {
     width: min(50%, 25vmin);
-    // width: 50%;
     animation: animation 0.5s linear;
 }
 

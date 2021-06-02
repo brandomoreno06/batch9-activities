@@ -13,7 +13,7 @@ var player2Side = document.getElementById('player2')
 var selectInstruction = document.getElementById('instruction-select');
 
 //DECLARE A "PLAYER" OBJECT
-let player = {};
+let player;
 
 
 //PLAYER 1 TO SELECT SYMBOL
@@ -31,9 +31,7 @@ function selectSymbolX() {
     xButton.classList.remove('none-selected');
     oButton.classList.remove('none-selected');
     //set currentSymbol on "player" object
-    player.currentSymbol = "x";
-    player.opponentSymbol = "o";
-    
+    player = "x";
     
 }
 
@@ -51,8 +49,7 @@ function selectSymbolO() {
     xButton.classList.remove('none-selected');
     oButton.classList.remove('none-selected');
 
-    player.currentSymbol = "o";
-    player.opponentSymbol = "x";
+    player = "o";
 }
 
 xButton.onclick = selectSymbolX;

@@ -223,6 +223,10 @@ body {
   cursor: default;
 }
 
+.cell.winner {
+  transform: scale(1.5);
+}
+
 #result {
   width: var(--board-size);
   height: var(--board-size);
@@ -348,6 +352,8 @@ body {
   position: absolute;
   bottom: max(-60px, -10%);
   display: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .active-previous-next {

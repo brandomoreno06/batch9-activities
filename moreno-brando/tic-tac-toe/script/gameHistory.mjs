@@ -19,7 +19,6 @@ const saveHistory =  function () {
     let copyOfGameBoard = JSON.parse(JSON.stringify(gameBoard)); // DEEP CLONE gameBoard;
     gameBoardHistory.push(copyOfGameBoard);
     index = gameBoardHistory.length;
-    console.log(gameBoardHistory);
 }
 
 
@@ -42,6 +41,7 @@ function showPreviousNextButtons() {
     restartButton.classList.add('active-history');
     restartButton.innerHTML = "&#128472;";
 
+    previousButton.classList.remove('disabled');
     previousButton.classList.add('active-previous-next');
     nextButton.classList.add('active-previous-next', 'disabled');
     showGameOver.classList.add('hide');
@@ -91,6 +91,7 @@ function showGameBoardHistory() {
     let cell = gameBoardUI.querySelectorAll(".cell");
     cell.forEach(element => {
         element.getContext("2d").clearRect(0, 0, 600, 600);
+        element.classList.add('marked');
     });
     
     let id = 0; //id of cell (canvas)

@@ -1,10 +1,10 @@
-//CREATE GAMEBOARD ARRAY
+//CREATE GAMEBOARD ARRAY (DATA)
 const rows = 3;
 const cols = 3
 export let gameBoard = [];
 
 function createGameBoardArray () {
-    for (let i = 0; i < cols; i++) {
+    for (let i = 0; i < rows; i++) {
         gameBoard[i] = new Array(cols);
     }
 }
@@ -40,7 +40,7 @@ let currentPlayer;
 //CALLED ON "showBoard" function
 function startPlaying() {
     gameBoardUI.addEventListener('click', currentPLayerMove);
-    currentPlayer = player.currentSymbol;
+    currentPlayer = player;
 }
 
 
@@ -68,7 +68,7 @@ function currentPLayerMove(e) {
         saveHistory();
         
         //change current player to opponent (vice versa)
-        currentPlayer = currentPlayer == player.currentSymbol ? player.opponentSymbol : player.currentSymbol; 
+        currentPlayer = currentPlayer === "x" ? "o" : "x"; 
     }
 }
 
@@ -111,26 +111,30 @@ function checkWinner() {
 
     let combos = [combo1, combo2, combo3, combo4, combo5, combo6, combo7, combo8]
 
-
-    //filter the each element of combos and push the result to "filteredCombos"
     let filteredCombos = [];
+    let filterResult;
+    let indexOfCombo;
 
+
+    //filter the each element of combos and push the result to "filteredCombos" - expected; length = combos.length;
     for (let combo of combos) {
-        let filterResult = combo.filter((element) => {
-            return element == currentPlayer;
-        })
-        
+        filterResult = combo.filter((element) => {
+            return element == currentPlayer; //each instance of "x" or "o"
+        })   
         filteredCombos.push(filterResult);
     }
+
 
     //check if any  of filteredCombos element has a length of 3 of the same symbol
     for (const filteredCombo of filteredCombos) {
         if(filteredCombo.length == rows) {
-            // console.log(filteredCombos);
-            // console.log(filteredCombos.indexOf(filteredCombo))
+            indexOfCombo = filteredCombos.indexOf(filteredCombo);
+            console.log(indexOfCombo);
             winner = true;
         }
     }
+    console.log(filterResult)
+    console.log(filteredCombos)
 }
 
 
@@ -150,7 +154,6 @@ function isTie() {
     
     //check if string length is equal to number of cells
     if (stringSymbol.length == rows ** 2 && !winner) {
-        console.log("It's a tie!")
         tie = true;
     }
 }
@@ -226,7 +229,7 @@ function showGameResult() {
         clearGameBoardHistory();
         gameBoardUI.classList.add('hide')
         gameBoardUI.innerHTML = "";
-        gameBoard = new Array(rows);
+        gameBoard = [];
         createGameBoardArray();
         createGameBoardDOM();
         startPlaying();
