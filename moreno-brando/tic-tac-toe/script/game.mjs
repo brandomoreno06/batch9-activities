@@ -1,7 +1,7 @@
 //CREATE GAMEBOARD ARRAY (DATA)
 const rows = 3;
 const cols = 3
-export let gameBoard = [];
+let gameBoard = [];
 
 function createGameBoardArray () {
     for (let i = 0; i < rows; i++) {
@@ -13,7 +13,7 @@ createGameBoardArray();
 
 
 //CREATE DOM ELEMENTS WITH DATA ATTRIBUTE AS INDEX [i] and [j]OF "gameBoard"
-export var gameBoardUI = document.getElementById('game-board');
+var gameBoardUI = document.getElementById('game-board');
 
 function createGameBoardDOM() {
     for(const row of gameBoard) {
@@ -30,7 +30,7 @@ createGameBoardDOM();
 
 import { player, playSetupContainer, xButton, oButton, player1Side, player2Side, player1Symbol, player2Symbol } from "./setup.mjs"
 import { saveHistory } from "./gameHistory.mjs"
-export default startPlaying;
+
 
 let winner = false;
 let tie = false;
@@ -38,7 +38,7 @@ let currentPlayer;
 
 
 //CALLED ON "showBoard" function
-function startPlaying() {
+const startPlaying = function () {
     gameBoardUI.addEventListener('click', currentPLayerMove);
     currentPlayer = player;
 }
@@ -49,27 +49,20 @@ function currentPLayerMove(e) {
     let i = e.target.getAttribute('data-row');  //date-row attribute
     let j = e.target.getAttribute('data-index'); //date-index attribute
 
-    if(gameBoard[i][j] === "x" || gameBoard[i][j] === "o") {
-        return; //return if cell is filled
-    }
+    if(gameBoard[i][j] === "x" || gameBoard[i][j] === "o") return; //return if cell is filled
+    if(winner) return;
 
-    if(winner) {
-        return;
-    }
-
-    else {
-        e.target.classList.add('marked');
-        gameBoard[i][j] = currentPlayer;
-        drawImage(e);
-        checkWinner();
-        isTie();
-        showPlayerTurn(e);
-        setTimeout(showGameResult, 500);
-        saveHistory();
-        
-        //change current player to opponent (vice versa)
-        currentPlayer = currentPlayer === "x" ? "o" : "x"; 
-    }
+    e.target.classList.add('marked');
+    gameBoard[i][j] = currentPlayer;
+    drawImage(e);
+    checkWinner();
+    isTie();
+    showPlayerTurn(e);
+    setTimeout(showGameResult, 500);
+    saveHistory();
+    
+    //change current player to opponent (vice versa)
+    currentPlayer = currentPlayer === "x" ? "o" : "x"; 
 }
 
 
@@ -133,7 +126,7 @@ function checkWinner() {
             winner = true;
         }
     }
-    console.log(filterResult)
+    
     console.log(filteredCombos)
 }
 
@@ -246,3 +239,9 @@ function showPlayerTurn() {
     player1Side.classList.toggle('player-turn');
     player2Side.classList.toggle('player-turn');
 }
+
+
+
+
+export { gameBoard, gameBoardUI }
+export default startPlaying;
