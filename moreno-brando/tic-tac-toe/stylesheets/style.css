@@ -227,6 +227,10 @@ body {
   transform: scale(1.5);
 }
 
+.cell:hover > img {
+  width: 500px;
+}
+
 #result {
   width: var(--board-size);
   height: var(--board-size);

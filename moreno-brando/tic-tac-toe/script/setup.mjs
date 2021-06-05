@@ -1,3 +1,5 @@
+import startPLaying from "./game.mjs"
+
 
 var xButton = document.getElementById('x-button');
 var oButton = document.getElementById('o-button');
@@ -59,8 +61,6 @@ oButton.onclick = selectSymbolO;
 
 //START PLAYING - DISPLAY THE GAMEBOARD
 
-import startPLaying from "./game.mjs"
-
 function showBoard() {
     if (player1Symbol.textContent === "" || player2Symbol.textContent === "") {
         xButton.classList.add('none-selected');
@@ -83,6 +83,8 @@ function showBoard() {
 }
 
 playButton.onclick = showBoard;
+
+
 
 export { player, playSetupContainer, xButton, oButton, player1Side, player2Side, player1Symbol, player2Symbol }
 
