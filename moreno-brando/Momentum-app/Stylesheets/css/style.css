@@ -640,11 +640,23 @@ ul #added-notification {
   }
 
   #greetings {
-    font-size: min(6vh, 20vw);
+    font-size: min(4vh, 20vw);
+  }
+
+  #edit-name {
+    left: -20px;
   }
 
   #main-focus-container {
     margin: auto;
+  }
+
+  #main-focus-container > label {
+    font-size: min(8vw, 25px) !important;
+  }
+
+  #mainfocus, #mainfocus:disabled {
+    font-size: min(8vw, 25px);
   }
 
   #todo-button {
