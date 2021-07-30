@@ -1,0 +1,30 @@
+.sidebar {
+    width: 350px;
+    position: absolute;
+    right: 0;
+    height: auto;
+    max-height: 98%;
+    overflow-y: scroll;
+    border-radius: 20px 0 0 20px;
+    border: 2px solid #4a4c52;
+    background-color: lightgray;
+    color: black;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.sidebar__header {
+    border-bottom: 1px solid gray;
+    margin-bottom: 20px;
+}
+
+.sidebar__chats__name {
+    height: 20px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.sidebar__chats__name:hover {
+    background-color: var(--themeColor);
+    color: white;
+}

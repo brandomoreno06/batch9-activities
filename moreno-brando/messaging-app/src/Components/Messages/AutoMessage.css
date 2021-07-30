@@ -1,0 +1,9 @@
+.autoMessage__option {
+    width: max-content;
+    height: 25px;
+    background-color: transparent;
+    border: 1px solid var(--themeColor_2);
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+}
