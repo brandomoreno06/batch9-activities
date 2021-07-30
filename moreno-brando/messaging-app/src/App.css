@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+}
+
+:root {
+    --themeColor: #2b303d;
+    --themeColor_2: #ff7324;
+}
+
+
+button {
+    cursor: pointer;
+}

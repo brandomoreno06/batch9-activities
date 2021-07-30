@@ -1,0 +1,46 @@
+.createMessage {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    height: max-content;
+}
+
+.createMessage__input {
+    width: 90%;
+    height: auto;
+    min-height: 25px;
+    max-height: 150px;
+    background-color: #23252d;
+    overflow-y: scroll;
+    border-radius: 20px;
+    outline: none;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.createMessage__input:focus {
+    box-shadow: 0 0 2px var(--themeColor_2);
+}
+
+.createMessage__input::-webkit-scrollbar {
+    width: 0;
+}
+
+
+.createMessage_sendButton {
+    background: none;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.createMessage_sendButton:disabled .sendButton {
+    color: gray;
+}
+
+.sendButton {
+    color: var(--themeColor_2);
+}
