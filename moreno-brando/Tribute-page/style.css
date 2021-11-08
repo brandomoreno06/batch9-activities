@@ -1,21 +1,17 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     color: white;
-<<<<<<< HEAD
-=======
     margin: 0;
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 }
 
 #main {
     text-align: center;
 }
 
-<<<<<<< HEAD
-#container{
-    background-image: url("assets/background-image.jpg");
-
-=======
 #header {
     height: 50px;
     background-color: black;
@@ -26,7 +22,6 @@ body {
     top: 0;
     z-index:  1;
     align-items: center;
-
 }
 
 
@@ -88,20 +83,10 @@ body {
 
 #container{
     background-image: radial-gradient(black, black, darkblue, black, black);
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 }
 
 
 #title {
-<<<<<<< HEAD
-    font-size: 50px;
-    font-weight: 700;
-    display: block;
-    text-align: center;
-    background-image: linear-gradient(to right, orange, skyblue, gray);
-    position: sticky;
-    top: 0px;
-=======
     display: block;
     position: relative;
     top: 40px;
@@ -114,20 +99,10 @@ body {
     box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
     border-radius: 10px;
     text-transform: uppercase;
-
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 }
 
 
 #image {
-<<<<<<< HEAD
-    width: 60%; /* 8. As a user, I want the **img element** to be **responsive** to resizing, relative to the width of its parent element.*/
-    padding: 30px;
-    background-image: linear-gradient(orange, skyblue, gray);
-    border-radius: 3px;
-}
-
-=======
     width: 80%; /* 8. As a user, I want the **img element** to be **responsive** to resizing, relative to the width of its parent element.*/
     margin: 20px auto 20px auto;
     box-shadow: 0 0 5px 5px rgba(255,255,255,0.2);
@@ -136,41 +111,11 @@ body {
 }
 
 
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 #img-div{
     text-align: center;
     
 }
 
-<<<<<<< HEAD
-#img-caption{
-    color: white;
-    font-size: 15px;
-    font-weight: 300;
-    text-align: center;
-    background-image: linear-gradient(to right, orange, skyblue, gray, skyblue, orange);
-    margin-left: 10%;
-    margin-right: 10%;
-    border-radius: 3px;
-}
-
-#tribute-info{
-    font-size: 22px;
-    font-weight: 800;
-    text-align: center;
-    margin-left: 10%;
-    margin-right: 10%;
-    background-image: linear-gradient(to right, skyblue, gray, skyblue);
-    padding: 30px;
-    color: white;
-    text-transform: uppercase;
-    
-}
-
-button {
-    background-image:linear-gradient(orange, gray);
-    color: white;
-=======
 
 #img-caption{
     width: 80%;
@@ -206,22 +151,12 @@ button {
 
 
 button {
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     font-size: 20px;
     border-style: none;
     border-radius: 5px;
     width: 300px;
     height: 40px;
     text-transform: uppercase;
-<<<<<<< HEAD
-}
-
-a :hover{
-    background-image: linear-gradient(to right, blue, gray);
-    color: white;
-}
-
-=======
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 5px 5px rgba(255,255,255,0.2);
@@ -237,18 +172,13 @@ a :hover{
 a :active {
     color: red;
 }
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
 
 #section{
     padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-<<<<<<< HEAD
-    background-image: url("assets/background-image-2.jpg");
-=======
     background-image: url("assets/background-image.jpg");
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     background-attachment: fixed;
     background-repeat: none;
     background-size: cover;
@@ -260,37 +190,7 @@ a :active {
     padding-bottom: 10px;
     border-top: 3px ridge gray;
     font-size: 22px;
-<<<<<<< HEAD
     width: 90%;
-    
-}
-
-h1{
-    background-image: linear-gradient(to right, orange,skyblue, gray);
-    width: 90%;
-    margin:auto;
-    margin-top: 30px;
-    color: black;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    
-}
-
-h2{
-    background-image: linear-gradient(to right, skyblue,gray);
-}
-
-#introduction {
-    box-sizing: border-box;
-    margin: 50px;
-    background-image: linear-gradient(to right, gray, skyblue, gray);
-    padding: 30px;
-
-}
-
-ul {
-=======
-    width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 5px 5px rgba(255,255,255,0.2);
 }
@@ -313,7 +213,6 @@ h2{
     border-radius: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    
 }
 
 
@@ -325,37 +224,23 @@ h2{
     box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
     line-height: 1.5;
     width: 100%;
-
+    text-align: center;
 }
 
 
 #companies {
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     list-style: none;
     padding-inline-start: 0;
-    width: 80%;
+    width: 90%;
     font-size: 20px;
-
 }
 
-<<<<<<< HEAD
-li {
-=======
 
 #companies li {
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
     min-height: 250px;
     margin-top: 50px;
     padding: 50px;
     float: left;
-<<<<<<< HEAD
-    border-radius: 3px;
-    border-top: 3px gray ridge;
-    background-image: linear-gradient(orange, gray);
-    color: white;
-    
-}
-=======
     background-color: rgba(0, 0, 0, 0.5);
     box-shadow: 0 0 5px 2px rgba(255,255,255,0.2);
     border-radius: 10px;
@@ -382,4 +267,3 @@ li {
         padding-right: 15px;
     }
 }
->>>>>>> 3b31639eaff897d185c58ec10d67536431a0bfc6
