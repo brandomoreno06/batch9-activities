@@ -73,51 +73,62 @@ function showQuote(quoteContent) {
 
     inputQuote.value = "";
 
+    addedNotification.classList.toggle('active-notification');
+
+    //show notification when added new quote
+    setTimeout(function() { 
+        addedNotification.classList.remove('active-notification');
+    }, 2000)
 
     //add event listener for each quote - REMOVE FUNCTION
-    removeQuote.addEventListener('click', function() {
-        this.parentElement.classList.add('deleted-quote-div');
-        var deletedQuote  = document.querySelector(".deleted-quote-div .quote-item"); //find the child textContent/quote of the "deleted-quote-div" parent.
-        let i = quotes.indexOf(deletedQuote.textContent); //find index of deletedQuote on the exisiting quote array;
-        quotes.splice(i, 1); //remove the quote from array
-        saveQuotes();
-        this.parentElement.remove(); //remove from DOM
-    })
-
+    removeQuote.addEventListener('click', removeQuoteItem)
 
     //add event listener for each quote - EDIT FUNCTION
-    editQuote.addEventListener('click', function() {
-        //remove "edited class" for non-selected edit buttons (other items in the list)
-        var editedClassAll = document.querySelectorAll('.edited');
-        editedClassAll.forEach(function(element) {
-            element.classList.remove('edited');
-        })
+    editQuote.addEventListener('click', editQuoteItem)
+}
 
-        // add "edited class to current on click element"
-        var textSpan = this.previousElementSibling;
-        textSpan.classList.add('edited');
-        inputQuote.value = textSpan.textContent;
-        addButton.disabled = true;
 
-        //index of the quote from the stored array of quotes
-        let i = quotes.indexOf(textSpan.textContent);
-        
-        function editQuote(e) {
-            if(e.key === "Enter" && textSpan.classList.contains('edited')) {
-                quotes[i] =  inputQuote.value.trim(); //reassign value
-                saveQuotes();
-                textSpan.textContent = inputQuote.value;
-                textSpan.classList.remove('edited');
-                inputQuote.value = "";
-                addButton.disabled = false;
+function removeQuoteItem() {
+    var removeQuoteButton = this
 
-            }
-        }
+    removeQuoteButton.parentElement.classList.add('deleted-quote-div');
+    var deletedQuote  = document.querySelector(".deleted-quote-div .quote-item"); //find the child textContent/quote of the "deleted-quote-div" parent.
+    let i = quotes.indexOf(deletedQuote.textContent); //find index of deletedQuote on the exisiting quote array;
+    
+    quotes.splice(i, 1); //remove the quote from array
+    removeQuoteButton.parentElement.remove();
+    saveQuotes();
+}
 
-        inputQuote.addEventListener("keyup", editQuote)
+
+function editQuoteItem() {
+    var editedClassAll = document.querySelectorAll('.edited'); //remove "edited class" for non-active(other than clicked) edit button
+    editedClassAll.forEach(function(element) {
+        element.classList.remove('edited');
     })
 
+    // add "edited class to current on click element"
+    var textSpan = this.previousElementSibling;
+    textSpan.classList.add('edited');
+    inputQuote.value = textSpan.textContent;
+    addButton.disabled = true;
 
+    //index of the quote-item from the stored quotes
+    let i = quotes.indexOf(textSpan.textContent);
+    
+    function editQuote(e) {
+        if(e.key === "Enter" && textSpan.classList.contains('edited')) {
+            quotes[i] =  inputQuote.value.trim(); //reassign value
+            saveQuotes();
+            textSpan.textContent = inputQuote.value;
+            textSpan.classList.remove('edited');
+            inputQuote.value = "";
+            addButton.disabled = false;
+
+        }
+    }
+
+    inputQuote.addEventListener("keyup", editQuote)
 }
 
 

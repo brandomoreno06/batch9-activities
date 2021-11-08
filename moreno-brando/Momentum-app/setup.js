@@ -68,7 +68,7 @@ setInterval(displayDefault, 60000);
 
 //Show or Hide "Continue" button while entering name;
 inputName.oninput = function () {
-    inputButton.style.display = inputName.checkValidity() ? "block" : "none";
+    inputButton.style.display = (inputName.checkValidity() || inputName.value.trim() !== "") ? "block" : "none";
 }
 
 //upon clicking continue after entering name, show Greetings and mainFocus

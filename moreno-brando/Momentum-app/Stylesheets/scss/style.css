@@ -3,7 +3,7 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: -apple-system, BlinkMacSystemFont, "Neue Haas Grotesk Text Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-image: url("../../assets/nature-in-green-and-blue.jpg");
+  background-image: url("../../assets/long-exposure-of-a-waterfall-in-nature.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-color: black;
@@ -640,23 +640,11 @@ ul #added-notification {
   }
 
   #greetings {
-    font-size: min(4vh, 20vw);
-  }
-
-  #edit-name {
-    left: -20px;
+    font-size: min(6vh, 20vw);
   }
 
   #main-focus-container {
     margin: auto;
-  }
-
-  #main-focus-container > label {
-    font-size: min(8vw, 25px) !important;
-  }
-
-  #mainfocus, #mainfocus:disabled {
-    font-size: min(8vw, 25px);
   }
 
   #todo-button {
@@ -716,5 +704,6 @@ ul #added-notification {
     transform: translateX(-50%);
   }
 }
+/*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=style.css.map */
